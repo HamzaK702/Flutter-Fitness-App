@@ -1,8 +1,9 @@
 // main.dart
 import 'package:flutter/material.dart';
-// import 'Auth.dart';
+ import 'Auth.dart';
 // import 'Register.dart';
 import 'onboarding.dart'; // Import the onboarding screen file
+import 'homepage.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Fitness Club',
-      home: OnboardingScreen(),
+      home: AuthScreen(),
     );
   }
 }

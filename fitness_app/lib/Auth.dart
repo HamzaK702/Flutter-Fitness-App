@@ -43,7 +43,8 @@ class _AuthScreenState extends State<AuthScreen> {
 
     if (response.statusCode == 200) {
       print('Login successful');
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => homepage()));
+      print(response.body);
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
 
     } else {
       // Handle error
