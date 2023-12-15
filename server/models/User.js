@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const StudentSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     firstName:{
         type:String,
         required:true,
@@ -24,21 +24,20 @@ const StudentSchema = new mongoose.Schema({
         required:true,
         min:5
     },
-    picturePath:{
-        type:String,
-        default:""
-    },
     weight:{
         type:Number
         },
     height:{
         type:String
         },
-    trainers:{
-        type:Array,
-        default:[]
-    },
+    weightHistory: [
+        { type: mongoose.Schema.Types.ObjectId, ref: 'WeightHistory' }
+    ],
+    plan: { 
+        type: mongoose.Schema.Types.ObjectId, ref: 'Plan' 
+    }
+        ,
 },{timestamps:true});
 
-const Student = mongoose.model("Student" , StudentSchema);
-export default Student;
+const User = mongoose.model("User" , userSchema);
+export default User;

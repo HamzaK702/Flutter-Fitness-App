@@ -1,4 +1,6 @@
 
+import 'package:fitness_app/home_bloc.dart';
+import 'package:fitness_app/home_event_state.dart';
 import 'package:fitness_app/homepage.dart';
 import 'package:fitness_app/login_bloc.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +48,8 @@ class _AuthScreenState extends State<AuthScreen> {
           } else if (state is LoginSuccess) {
             print("Login done");
             setState(() => _isLoading = false);
+            
+            context.read<DayBloc>().add(DayRequested(id: state.user.id));
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen())); // Assuming HomeScreen exists
           } else if (state is LoginFailure) {
             setState(() => _isLoading = false);

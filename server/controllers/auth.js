@@ -1,77 +1,60 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import Student from "../models/Student.js";
-import Trainer from "../models/Trainer.js";
+import User from "../models/User.js";
+import Plan from '../models/Plan.js';
 
 // register Student
-export const registerStudent = async (req,res) => {
-    try{
+export const registerUser = async (req, res) => {
+    try {
         const { 
             firstName,
             lastName,
             email,
             password,
             picturePath,
-            weight=0,
-            height="",S
-         } = req.body;
+            weight = 0,
+            height = ""
+        } = req.body;
+
         const salt = await bcrypt.genSalt();
-        const passwordHash = await bcrypt.hash(password , salt);
-        const newStudent = new Student({
+        const passwordHash = await bcrypt.hash(password, salt);
+
+        // Create new User
+        const newUser = new User({
             firstName,
             lastName,
             email,
-            password:passwordHash,
+            password: passwordHash,
             picturePath,
             weight,
-            height,
-            trainers:[]
+            height
         });
-       const savedStudent =  await newStudent.save();
-       res.status(200).json(savedStudent);
-    } catch(err){
-        res.status(500).json({error:err.message});
+
+        const savedUser = await newUser.save();
+
+        // Create a default Plan for the user
+        const defaultPlan = new Plan({
+            userId: savedUser._id,
+            Split: 'Push/Pull/Legs Split',
+            count: 0
+        });
+
+        await defaultPlan.save();
+
+        res.status(200).json(savedUser);
+    } catch (err) {
+        console.error('Error registering user:', err);
+        res.status(500).json({ error: err.message });
     }
 };
 
 
-
-
-export const registerTrainer = async (req,res) => {
-    try{
-        const { 
-            firstName,
-            lastName,
-            email,
-            password,
-            picturePath,
-            weight=0,
-            height="",
-         } = req.body;
-        const salt = await bcrypt.genSalt();
-        const passwordHash = await bcrypt.hash(password , salt);
-        const newTrainer = new Trainer({
-            firstName,
-            lastName,
-            email,
-            password:passwordHash,
-            picturePath,
-            weight,
-            height,
-            trainers:[]
-        });
-       const savedTrainer =  await newTrainer.save();
-       res.status(201).json(savedTrainer);
-    } catch(err){
-        res.status(500).json({error:err.message});
-    }
-};
 
 
 export const login = async (req,res) => {
     try{
         const {email , password} = req.body;
-        const user = await Student.findOne({email:email})
+        const user = await User.findOne({email:email})
         if(!user) return res.status(400).json({msg:"User does not exist"});
         const isMatch = await bcrypt.compare(password , user.password);
         if(!isMatch) return res.status(400).json({msg:"Invalid credentials"});
