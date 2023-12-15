@@ -43,7 +43,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     buildPage('Start Your Fitness Journey', 'assets/runningMan.png'),
                     buildPage('Plan your workouts', 'assets/runningGirl.png'),
                     buildPage('Your Personal Fitness Tracker', 'assets/runningManRight.png'),
-                    buildPage('Achieve Your Physique Goals', 'assets/bodyBuilder.png'),
+                    buildPage('Volume up your body goals', 'assets/bodyBuilder.png'),
                   ],
                 ),
                 Positioned(
@@ -62,8 +62,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 Positioned(
                   bottom: 30,
                   child: ElevatedButton(
-                    child: Text('Get Started', style: GoogleFonts.notoSans(
-                      textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+                    child: Text('GET STARTED', style: GoogleFonts.notoSans(
+                      textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black),
                     )),
                     onPressed: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => AuthScreen()));
@@ -93,20 +93,23 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           fit: BoxFit.cover,
         ),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Spacer(flex: 8),
-          Text(
-            text,
-            style: GoogleFonts.notoSans(
-              textStyle: TextStyle(fontSize: 24, fontWeight: FontWeight.w300, color: Colors.white),
+     child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Spacer(flex: 8),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0), // Left and right padding
+              child: Text(
+                text.toUpperCase(),
+                style: GoogleFonts.notoSans(
+                  textStyle: TextStyle(fontSize: 34, fontWeight: FontWeight.w800, color: Colors.white),
+                ),
+                textAlign: TextAlign.center,
+              ),
             ),
-            textAlign: TextAlign.center,
-          ),
-          Spacer(flex: 2),
-        ],
-      ),
+            Spacer(flex: 2),
+          ],
+        ),
     );
   }
 }

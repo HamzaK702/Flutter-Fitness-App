@@ -69,6 +69,7 @@ flutter:
     - assets/gym.png
     - assets/progress.png
     - assets/plan.jpg
+    - assets/LOGO.png
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
