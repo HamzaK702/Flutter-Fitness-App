@@ -1,9 +1,13 @@
+
 import 'package:fitness_app/homepage.dart';
+import 'package:fitness_app/login_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart' as http;
 import 'Register.dart'; 
-import 'dart:convert';
+
+
+import 'login_event_state.dart';
 
 class AuthScreen extends StatefulWidget {
   @override
@@ -18,45 +22,37 @@ class _AuthScreenState extends State<AuthScreen> {
 
 
 
-  void _trySubmit() async {
+  void _trySubmit() {
   final isValid = _formKey.currentState!.validate();
   FocusScope.of(context).unfocus(); // to close the keyboard
 
   if (isValid) {
     _formKey.currentState!.save();
-    setState(() {
-      _isLoading = true;
-    });
-    
-    final response = await http.post(
-      Uri.parse('http://localhost:3001/auth/login'), // Change to your server's IP when running on a real device
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode({
-        'email': _email.trim(),
-        'password': _password.trim(),
-      }),
-    );
-    
-    setState(() {
-      _isLoading = false;
-    });
-
-    if (response.statusCode == 200) {
-      print('Login successful');
-      print(response.body);
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
-
-    } else {
-      // Handle error
-    }
+    // Dispatching LoginRequested event to LoginBloc
+    context.read<LoginBloc>().add(LoginRequested(_email.trim(), _password.trim()));
   }
 }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black, // Set the background color to dark
-      body: Center(
+      body: BlocListener<LoginBloc, LoginState>(
+        listener: (context, state) {
+          if (state is LoginLoading) {
+            print("button pressed");
+            setState(() => _isLoading = true);
+          } else if (state is LoginSuccess) {
+            print("Login done");
+            setState(() => _isLoading = false);
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen())); // Assuming HomeScreen exists
+          } else if (state is LoginFailure) {
+            setState(() => _isLoading = false);
+            print("some error");
+          }
+        },
+        child:Center(
         child: SingleChildScrollView(
           padding: EdgeInsets.all(16),
           child: Form(
@@ -161,6 +157,7 @@ class _AuthScreenState extends State<AuthScreen> {
           ),
         ),
       ),
+    )
     );
   }
 }

@@ -1,4 +1,6 @@
 // main.dart
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fitness_app/login_bloc.dart';
 import 'package:flutter/material.dart';
  import 'Auth.dart';
 // import 'Register.dart';
@@ -12,9 +14,12 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Fitness Club',
-      home: AuthScreen(),
+    return BlocProvider(
+      create: (context) => LoginBloc(),
+      child: MaterialApp(
+        title: 'Fitness Club',
+        home: AuthScreen(),
+      ),
     );
   }
 }
