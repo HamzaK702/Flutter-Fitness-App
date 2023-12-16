@@ -1,4 +1,5 @@
 import 'package:fitness_app/Auth.dart';
+import 'package:fitness_app/AuthScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:convert';
@@ -177,33 +178,33 @@ void _trySubmit() async {
                 SizedBox(height: 20),
                 if (_isLoading) CircularProgressIndicator(),
                 if (!_isLoading) 
-                 ElevatedButton(
-                    child: Text('Register', style: GoogleFonts.notoSans(
-                textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
-              ),), 
-                  onPressed: () {
-                       if (_formKey.currentState!.validate()) {
-                        _formKey.currentState!.save();
-                        _trySubmit();
-                        // Perform login logic here
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Color(0xFFF2FF00), // Button color
-                      onPrimary: Colors.white, // Text color
-                      minimumSize: Size(200, 50), // Button size
-                    ),
-            ),
+                 SizedBox(height: 40,),
+                         MaterialButton(
+                          onPressed: _trySubmit,
+                          height: 50,
+                          // margin: EdgeInsets.symmetric(horizontal: 50),
+                          color:  Color(0xFFF2FF00),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50),
+
+                          ),
+                          // decoration: BoxDecoration(
+                          // ),
+                          child: Center(
+                            child: Text("REGISTER", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),),
+                          ),
+                        ),
                  
                 if (!_isLoading) 
                   TextButton(
-                   child: Text('Create new account', style: GoogleFonts.notoSans(
-                textStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white),
-              ),), 
+                   child: Text(
+                      "Already have an account?",
+                      style: TextStyle(color: Colors.grey),
+                    ), 
                    onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => RegisterScreen()),
+                        MaterialPageRoute(builder: (context) => HomePage()),
                       );
                     },
 

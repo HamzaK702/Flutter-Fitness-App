@@ -3,7 +3,7 @@ import 'package:fitness_app/login_bloc.dart';
 import 'package:fitness_app/onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'Auth.dart'; // Assuming Auth is your initial screen
+import 'AuthScreen.dart'; // Assuming Auth is your initial screen
 
 void main() {
   runApp(
@@ -17,7 +17,7 @@ void main() {
         ),
       ],
       child: MyApp(),
-    ),
+    ),  
   );
 }
 
@@ -30,3 +30,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+
+

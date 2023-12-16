@@ -1,4 +1,5 @@
 import 'package:fitness_app/Auth.dart';
+import 'package:fitness_app/AuthScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -24,6 +25,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       precacheImage(AssetImage('assets/runningGirl.png'), context),
       precacheImage(AssetImage('assets/runningManRight.png'), context),
       precacheImage(AssetImage('assets/bodyBuilder.png'), context),
+      precacheImage(AssetImage('assets/LOGO.png'), context),
     ]);
   }
 
@@ -66,7 +68,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black),
                     )),
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => AuthScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Color(0xFFF2FF00),
