@@ -10,23 +10,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFFF2FF00),
-        leading: IconButton(
-          icon: Icon(Icons.menu, color: Colors.black),
-          onPressed: () {
-            // Open drawer or perform another action
-          },
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.notifications, color: Colors.black),
-            onPressed: () {
-              // Perform action on notification icon tap
-            },
-          ),
-        ],
-      ),
+    
       body: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, loginState) {
           if (loginState is LoginSuccess) {
@@ -40,13 +24,27 @@ class HomeScreen extends StatelessWidget {
                   color: Colors.black,
                   child: Column(
                     children: <Widget>[
-                      SizedBox(height: 12),
-                      Text('Welcome back, ${loginState.user.firstName}', style: GoogleFonts.notoSans(
-                        textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-                      )),
-                      Text("It's $dayInfo day!", style: GoogleFonts.notoSans(
-                        textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.white),
-                      )),
+                      SizedBox(height: 30),
+                      Padding(
+                        padding: EdgeInsets.only(left: 16.0),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text('Hi, ${loginState.user.firstName}', style: GoogleFonts.roboto(
+                            textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.white),
+                          )),
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Padding(
+                        padding: EdgeInsets.only(left: 16.0),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text("Let's check your activity", style: GoogleFonts.roboto(
+                            textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Colors.white),
+                          )),
+                        ),
+                      ),
+                     
                       SizedBox(height: 12),
                       GridView.count(
                         crossAxisCount: 2,
