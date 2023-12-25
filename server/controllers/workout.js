@@ -13,13 +13,16 @@ export const addWorkout = async (req, res) => {
 
 
 export const getWorkout = async (req, res) => {
+  
 try{
     
     const day = req.query.day;
+    console.log("it was called: "+day)
     const workout = await WorkoutModel.findOne({ Day: day });
     if (!workout) {
       return res.status(404).send('Workout not found for the specified day');
     }
+    
     res.status(200).json(workout);
   } catch (error) {
     res.status(500).send('Error retrieving workout: ' + error.message);

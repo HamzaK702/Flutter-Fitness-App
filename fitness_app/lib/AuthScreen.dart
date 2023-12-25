@@ -102,6 +102,7 @@ class _HomePageState extends State<HomePage> {
                         children: <Widget>[
                           // Email Field
                          TextFormField(
+                          initialValue: 'hmzkhan@gmail.com',
                   key: ValueKey('email'),
                   validator: (value) {
                     if (value!.isEmpty || !value.contains('@')) {
@@ -133,6 +134,7 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(height: 12),
                 TextFormField(
                   key: ValueKey('password'),
+                  initialValue: "hamza123",
                   validator: (value) {
                     if (value!.isEmpty || value.length < 7) {
                       return 'Password must be at least 7 characters long.';

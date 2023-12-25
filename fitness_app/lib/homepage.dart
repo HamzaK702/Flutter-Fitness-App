@@ -1,4 +1,7 @@
+import 'package:fitness_app/bloc/start_bloc.dart';
+import 'package:fitness_app/exercise.dart';
 import 'package:fitness_app/home_bloc.dart';
+import 'package:fitness_app/startWorkout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -50,10 +53,10 @@ class HomeScreen extends StatelessWidget {
                         crossAxisCount: 2,
                         shrinkWrap: true,
                         children: <Widget>[
-                          _buildCard('Start Workout', 'assets/start.jpg', context),
-                          _buildCard('Plan Workout', 'assets/plan.jpg', context),
-                          _buildCard('Gym Stats', 'assets/gym.png', context),
-                          _buildCard('Progress', 'assets/progress.png', context),
+                          _buildCard('Start Workout', 'assets/start.jpg', context, dayInfo),
+                          _buildCard('Plan Workout', 'assets/plan.jpg', context,  dayInfo),
+                          _buildCard('Gym Stats', 'assets/gym.png', context,  dayInfo),
+                          _buildCard('Progress', 'assets/progress.png', context,  dayInfo),
                         ],
                       ),
                     ],
@@ -74,13 +77,17 @@ class HomeScreen extends StatelessWidget {
 
   
 
-  Widget _buildCard(String title, String imagePath, BuildContext context) {
+  Widget _buildCard(String title, String imagePath, BuildContext context, String dayInfo) {
     return Card(
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: () {
           if (title == 'Start Workout') {
-            
+            context.read<StartBloc>().add(WorkoutRequested(Day: dayInfo)); 
+            Navigator.push(
+              context, 
+              MaterialPageRoute(builder: (context) => MainPage()),
+            );
           }
           else if (title == 'Plan Your Workout') {
             

@@ -1,3 +1,4 @@
+import 'package:fitness_app/bloc/start_bloc.dart';
 import 'package:fitness_app/home_bloc.dart';
 import 'package:fitness_app/login_bloc.dart';
 import 'package:fitness_app/onboarding.dart';
@@ -14,6 +15,9 @@ void main() {
         ),
         BlocProvider<DayBloc>(
           create: (context) => DayBloc(),
+        ),
+        BlocProvider<StartBloc>(
+          create: (context) => StartBloc(),
         ),
       ],
       child: MyApp(),

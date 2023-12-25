@@ -11,7 +11,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 Future<void> _onLoginRequested(LoginRequested event, Emitter<LoginState> emit) async {
   emit(LoginLoading());
   try {
-      print("it is calling the api");
+      print("it is calling the api: ${event.email} and ${event.password}");
       final response = await http.post(
         Uri.parse('http://localhost:3001/auth/login'),
         headers: {'Content-Type': 'application/json'},
