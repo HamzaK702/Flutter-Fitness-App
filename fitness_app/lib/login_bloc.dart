@@ -25,10 +25,13 @@ Future<void> _onLoginRequested(LoginRequested event, Emitter<LoginState> emit) a
       final user = User.fromJson(responseData['user']);
       final token = responseData['token'];
       emit(LoginSuccess(user: user, token: token));
+      print("hello");
+      print("user: ${user} and token: ${token}");
     } else {
       emit(LoginFailure('Login Failed'));
     }
   } catch (e) {
+    
     emit(LoginFailure(e.toString()));
   }
 }

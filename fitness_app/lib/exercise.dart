@@ -88,7 +88,7 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Daily Workout Plan'),
+        title: Text(''),
         backgroundColor: Colors.black,  // Optional: Set AppBar color to black
       ),
       backgroundColor: Colors.black,  // Set the background color of the page
@@ -113,11 +113,41 @@ class MainPage extends StatelessWidget {
       ),
     );
   }
-
-  Widget _buildStartWorkoutSection(BuildContext context, StartLoadedState state) {
-    return Column(
+Widget _buildStartWorkoutSection(BuildContext context, StartLoadedState state) {
+  return SingleChildScrollView( // Wrap with SingleChildScrollView
+    child: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
+        Column(
+          children: [
+            Image.asset(
+              'assets/${state.data.day}.png',
+              
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Text(
+                "${state.data.day} Day",
+                style: GoogleFonts.notoSans(
+                  textStyle: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                state.data.details,
+                style: GoogleFonts.notoSans(
+                  textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w200, color: Colors.white),
+                ),
+                textAlign: TextAlign.left,
+              ),
+            ),
+          ],
+        ),
         Padding(
           padding: const EdgeInsets.all(20),
           child: Align(
@@ -138,19 +168,11 @@ class MainPage extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(20),
-          child: Text(
-            "${state.data.day} Day",
-            style: GoogleFonts.notoSans(
-              textStyle: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ),
       ],
-    );
-  }
+    ),
+  );
+}
+
 
 void _showExerciseBottomSheet(BuildContext context, Workout workout) {
   showModalBottomSheet(

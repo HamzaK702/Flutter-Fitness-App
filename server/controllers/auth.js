@@ -5,6 +5,7 @@ import Plan from '../models/Plan.js';
 
 // register Student
 export const registerUser = async (req, res) => {
+    
     try {
         const { 
             firstName,
@@ -52,6 +53,7 @@ export const registerUser = async (req, res) => {
 
 
 export const login = async (req,res) => {
+    console.log("it came to lgin");
     try{
         const {email , password} = req.body;
         const user = await User.findOne({email:email})

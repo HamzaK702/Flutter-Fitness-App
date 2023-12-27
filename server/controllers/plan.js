@@ -52,6 +52,29 @@ export const getCurrentWorkout = async (req, res) => {
 };
 
 
+export const getCurrentSplit = async (req, res) => {
+    const { userId } = req.body;
+
+    if (!userId) {
+        return res.status(400).send({ message: 'Missing userId' });
+    }
+
+    try {
+        const plan = await Plan.findOne({ userId: mongoose.Types.ObjectId(userId) });
+
+        if (!plan) {
+            return res.status(404).send({ message: 'No plan found for this user' });
+        }
+        const split = plan.Split + "";
+        console.log(split)
+        res.status(200).send({ split });
+    } catch (error) {
+        console.error('Error retrieving current workout:', error);
+        res.status(500).send({ message: 'Internal Server Error' });
+    }
+};
+
+
 function muscleName(split, count) {
     switch (split) {
         case "Push/Pull/Legs Split":

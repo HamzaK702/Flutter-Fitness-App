@@ -1,6 +1,8 @@
+import 'package:fitness_app/bloc/plan_bloc.dart';
 import 'package:fitness_app/bloc/start_bloc.dart';
 import 'package:fitness_app/exercise.dart';
 import 'package:fitness_app/home_bloc.dart';
+import 'package:fitness_app/planWorkout.dart';
 import 'package:fitness_app/startWorkout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,10 +55,10 @@ class HomeScreen extends StatelessWidget {
                         crossAxisCount: 2,
                         shrinkWrap: true,
                         children: <Widget>[
-                          _buildCard('Start Workout', 'assets/start.jpg', context, dayInfo),
-                          _buildCard('Plan Workout', 'assets/plan.jpg', context,  dayInfo),
-                          _buildCard('Gym Stats', 'assets/gym.png', context,  dayInfo),
-                          _buildCard('Progress', 'assets/progress.png', context,  dayInfo),
+                          _buildCard('Start Workout', 'assets/start.jpg', context, dayInfo, loginState.user.id),
+                          _buildCard('Plan Workout', 'assets/plan.jpg', context,  dayInfo, loginState.user.id),
+                          _buildCard('Gym Stats', 'assets/gym.png', context,  dayInfo, loginState.user.id),
+                          _buildCard('Progress', 'assets/progress.png', context,  dayInfo, loginState.user.id),
                         ],
                       ),
                     ],
@@ -77,20 +79,29 @@ class HomeScreen extends StatelessWidget {
 
   
 
-  Widget _buildCard(String title, String imagePath, BuildContext context, String dayInfo) {
+  Widget _buildCard(String title, String imagePath, BuildContext context, String dayInfo, String ID) {
     return Card(
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: () {
           if (title == 'Start Workout') {
             context.read<StartBloc>().add(WorkoutRequested(Day: dayInfo)); 
+            context.read<PlanBloc>().add(PlanRequested(id: ID));
             Navigator.push(
               context, 
-              MaterialPageRoute(builder: (context) => MainPage()),
+              MaterialPageRoute(builder: (context) => WorkoutPlanPage()),
             );
+            // Navigator.push(
+            //   context, 
+            //   MaterialPageRoute(builder: (context) => MainPage()),
+            // );
           }
           else if (title == 'Plan Your Workout') {
-            
+            //context.read<PlanBloc>().add(PlanRequested(id: loginState.user.id));
+             Navigator.push(
+              context, 
+              MaterialPageRoute(builder: (context) => WorkoutPlanPage()),
+            );
           }
           else if (title == 'Gym Stats') {
             

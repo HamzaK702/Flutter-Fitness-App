@@ -1,6 +1,7 @@
 class Workout {
   String id;
   String day;
+  String details;
   List<ExerciseDetail> warmUp;
   List<ExerciseDetail> exercises;
   List<ExerciseDetail> coolDown;
@@ -8,6 +9,7 @@ class Workout {
   Workout({
     required this.id,
     required this.day,
+    required this.details,
     required this.warmUp,
     required this.exercises,
     required this.coolDown,
@@ -17,6 +19,7 @@ class Workout {
     return Workout(
       id: json['_id'],
       day: json['Day'],
+      details: json['Details'],
       warmUp: (json['WarmUp'] as List<dynamic>)
           .map((i) => ExerciseDetail.fromJson(i))
           .toList(),
@@ -33,6 +36,7 @@ class Workout {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['_id'] = this.id;
     data['Day'] = this.day;
+    data['Details'] = this.details;
     data['WarmUp'] = this.warmUp.map((v) => v.toJson()).toList();
     data['Exercises'] = this.exercises.map((v) => v.toJson()).toList();
     data['CoolDown'] = this.coolDown.map((v) => v.toJson()).toList();

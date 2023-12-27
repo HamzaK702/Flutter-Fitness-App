@@ -166,14 +166,14 @@ class _HomePageState extends State<HomePage> {
                 if (!_isLoading) 
                           SizedBox(height: 5,),
                          TextButton(
-    onPressed: () {
-      // TODO: Implement forgot password functionality
-    },
-    child: Text(
-      "Forgot Password?",
-      style: TextStyle(color: Colors.grey),
-    ),
-  ),
+                          onPressed: () {
+                            // TODO: Implement forgot password functionality
+                          },
+                          child: Text(
+                            "Forgot Password?",
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ),
 
                         SizedBox(height: 10,),
                          MaterialButton(
