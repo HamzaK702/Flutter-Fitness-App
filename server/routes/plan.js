@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post("/addWorkout" ,  addWorkout);
 router.get("/getExercises" ,  getWorkout); //gets you the exercises
-router.post("/selectPlan" , verifyToken , selectPlan);
+router.post("/selectPlan" ,  selectPlan);
 router.post("/getSplit", getCurrentSplit);
 router.post("/getWorkout", getCurrentWorkout); //get you the day of the workout
 

@@ -1,3 +1,4 @@
+import 'package:fitness_app/bloc/start_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'home_event_state.dart';
 import 'package:http/http.dart' as http;
@@ -24,6 +25,7 @@ class DayBloc extends Bloc<DayEvent, DayState> {
         final dayData = Split.fromJson(responseData);
         print("This is the day: ${dayData.day}");
         emit(DaySuccess(day: dayData.day));
+        WorkoutRequested(Day: dayData.day);
       } else {
         emit(DayFailure('Day retrieval failed'));
       }

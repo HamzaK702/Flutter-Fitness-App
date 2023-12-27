@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
                         padding: EdgeInsets.only(left: 16.0),
                         child: Align(
                           alignment: Alignment.centerLeft,
-                          child: Text('Hi, ${loginState.user.firstName}', style: GoogleFonts.roboto(
+                          child: Text('Hi, ${loginState.user.firstName} 👋', style: GoogleFonts.roboto(
                             textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.white),
                           )),
                         ),
@@ -49,16 +49,17 @@ class HomeScreen extends StatelessWidget {
                           )),
                         ),
                       ),
-                     
+                     buildSections(context, loginState.user.id, dayInfo, loginState.user.consist),
                       SizedBox(height: 12),
                       GridView.count(
                         crossAxisCount: 2,
                         shrinkWrap: true,
                         children: <Widget>[
-                          _buildCard('Start Workout', 'assets/start.jpg', context, dayInfo, loginState.user.id),
-                          _buildCard('Plan Workout', 'assets/plan.jpg', context,  dayInfo, loginState.user.id),
-                          _buildCard('Gym Stats', 'assets/gym.png', context,  dayInfo, loginState.user.id),
-                          _buildCard('Progress', 'assets/progress.png', context,  dayInfo, loginState.user.id),
+                          
+                          // _buildCard('Start Workout', 'assets/start.jpg', context, dayInfo, loginState.user.id),
+                          // _buildCard('Plan Workout', 'assets/plan.jpg', context,  dayInfo, loginState.user.id),
+                          // _buildCard('Gym Stats', 'assets/gym.png', context,  dayInfo, loginState.user.id),
+                          // _buildCard('Progress', 'assets/progress.png', context,  dayInfo, loginState.user.id),
                         ],
                       ),
                     ],
@@ -73,70 +74,196 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
- 
-
-
-
-  
-
-  Widget _buildCard(String title, String imagePath, BuildContext context, String dayInfo, String ID) {
-    return Card(
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        onTap: () {
-          if (title == 'Start Workout') {
-            context.read<StartBloc>().add(WorkoutRequested(Day: dayInfo)); 
-            context.read<PlanBloc>().add(PlanRequested(id: ID));
-            Navigator.push(
-              context, 
-              MaterialPageRoute(builder: (context) => WorkoutPlanPage()),
-            );
-            // Navigator.push(
-            //   context, 
-            //   MaterialPageRoute(builder: (context) => MainPage()),
-            // );
-          }
-          else if (title == 'Plan Your Workout') {
-            //context.read<PlanBloc>().add(PlanRequested(id: loginState.user.id));
-             Navigator.push(
-              context, 
-              MaterialPageRoute(builder: (context) => WorkoutPlanPage()),
-            );
-          }
-          else if (title == 'Gym Stats') {
-            
-          }
-          else if (title == 'Progress') {
-            
-          }
-        },
-        child: Stack(
-          alignment: Alignment.center,
+   
+@override
+  Widget buildSections(BuildContext context, ID, dayInfo, consistency) {
+    return  Padding(
+        padding: const EdgeInsets.all(8.0),
+        child:  Row(
           children: [
-            Image.asset(
-              imagePath,
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: double.infinity,
-            ),
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-                shadows: <Shadow>[
-                  Shadow(
-                    offset: Offset(0, 1),
-                    blurRadius: 3.0,
-                    color: Colors.black.withOpacity(0.7),
+            // 'Finished' card that takes half the width and specific height
+            Expanded(
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: SizedBox(
+                width: MediaQuery.of(context).size.width / 2 - 12, // Half the screen width minus half the space between cards
+                height: 160, // Height for the 'Finished' card
+                 child: InkWell(
+                  onTap: () {
+                    // Add your onTap functionality here
+                    print('Finished Card Tapped');
+                  },
+                        child: Card(
+                  color: Colors.grey[900],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16.0), // Rounded borders
                   ),
-                ],
+    child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text("Consistency 👊", style: GoogleFonts.roboto(
+            textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Colors.grey[600]),
+          )),
+          SizedBox(height: 8),
+          Text("$consistency", style: GoogleFonts.roboto(
+            textStyle: TextStyle(fontSize: 56, fontWeight: FontWeight.w800, color: Colors.white),
+          )),
+          Text('Completed Workouts', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w100, color: Colors.grey[600])),
+        ],
+      ),
+    ),
+  ),
+  ),
+),
+),
+            ),
+            SizedBox(width: 8),
+            // Column for the 'In Progress' and 'Time Spent' cards
+            Expanded(
+              child: Column(
+                children: [
+                  // 'In Progress' card with specific height
+                  InkWell(
+                    onTap: () {
+                      context.read<StartBloc>().add(WorkoutRequested(Day: dayInfo));
+                     Navigator.push(
+                        context, 
+                        MaterialPageRoute(builder: (context) => MainPage()),
+                      );
+                      print("Start workout Tapped");
+                    },
+                    child: SizedBox(
+                      height: 75, // Adjusted height for the 'In Progress' card
+                      child: Card(
+                        color: Color(0xFFF2FF00),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16.0), // Rounded borders
+                        ),
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('Start Workout', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.black)),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 8), // Spacing between the cards
+                  // 'Time Spent' card with specific height
+                  InkWell(
+                  onTap: () {
+                    print("Weekly Plan Tapped");
+                     context.read<PlanBloc>().add(PlanRequested(id: ID));
+                     Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                      builder: (context) => WorkoutPlanPage(userId: ID), // Replace 'yourUserId' with actual ID
+                    ),
+                  );
+                  },
+                  child: SizedBox(
+                    height: 75, // Adjusted height for the 'Time Spent' card
+                    child: Card(
+                      color: Color(0xFF317773),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16.0), // Rounded borders
+                      ),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Weekly Plan', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white)),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                                ],
               ),
             ),
+          ],
+        ),
+      );
+      
+    
+  }
+
+
+   Widget buildFinishedCard(BuildContext context) {
+    return Card(
+      color: Colors.grey[900],
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16.0),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("Consistency 👊", style: GoogleFonts.roboto(
+              textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Colors.grey[600]),
+            )),
+            SizedBox(height: 8),
+            Text("12", style: GoogleFonts.roboto(
+              textStyle: TextStyle(fontSize: 56, fontWeight: FontWeight.w800, color: Colors.white),
+            )),
+            Text('Completed Workouts', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w100, color: Colors.grey[600])),
           ],
         ),
       ),
     );
   }
+
+
+   Widget buildInProgressCard() {
+    return SizedBox(
+      height: 75,
+      child: Card(
+        color: Color(0xFFF2FF00),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Start Workout', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.black)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+
+   Widget buildTimeSpentCard() {
+    return SizedBox(
+      height: 75,
+      child: Card(
+        color: Color(0xFF317773),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Weekly Plan', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
 }
+  
+
+

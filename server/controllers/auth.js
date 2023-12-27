@@ -14,7 +14,8 @@ export const registerUser = async (req, res) => {
             password,
             picturePath,
             weight = 0,
-            height = ""
+            height = "",
+            consist = 0,
         } = req.body;
 
         const salt = await bcrypt.genSalt();
@@ -28,7 +29,8 @@ export const registerUser = async (req, res) => {
             password: passwordHash,
             picturePath,
             weight,
-            height
+            height,
+            consist
         });
 
         const savedUser = await newUser.save();

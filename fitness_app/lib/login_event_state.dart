@@ -29,9 +29,12 @@ class User {
   final String firstName;
   final String lastName;
   final String email;
+  final String height;
+  final int weight;
+  final int consist;
   // Add other fields as necessary
 
-  User({required this.id, required this.firstName, required this.lastName, required this.email});
+  User({required this.id, required this.firstName, required this.lastName, required this.email, required this.height, required this.weight, required this.consist});
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
@@ -39,6 +42,9 @@ class User {
       firstName: json['firstName'],
       lastName: json['lastName'],
       email: json['email'],
+      height: json['height'],
+      weight: json['weight'],
+      consist: json['consist'],
       // Parse other fields
     );
   }

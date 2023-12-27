@@ -7,11 +7,6 @@ abstract class PlanEvent extends Equatable {
 }
 
 
- 
- 
- 
-
-
 class PlanRequested extends PlanEvent {
  final String id;
   
@@ -20,4 +15,14 @@ class PlanRequested extends PlanEvent {
 
   @override
   List<Object> get props => [id];
+}
+
+class UpdatePlan extends PlanEvent {
+  final String userId;
+  final String split;
+
+  UpdatePlan({required this.userId,required this.split});
+
+  @override
+  List<Object> get props => [userId, split];
 }

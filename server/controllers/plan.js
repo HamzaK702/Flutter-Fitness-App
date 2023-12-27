@@ -22,8 +22,9 @@ const { userId, split } = req.body;
             { Split: split, count: 0 },
             { new: true, upsert: true }
         );
-
+           
         res.status(200).send({ message: 'Workout plan selected successfully', plan });
+        console.log("updated split info of user") 
     } catch (error) {
         console.error('Error selecting plan:', error);
         res.status(500).send({ message: 'Internal Server Error' });
@@ -88,7 +89,7 @@ function muscleName(split, count) {
             return ["Upper Body", "Lower Body"][count % 2];
         case "Fullbody":
             console.log("Fullbody")
-            return "Fullbody";
+            return "Full Body";
         default:
             console.log(split, count)
             return "Rest";

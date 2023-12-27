@@ -35,8 +35,10 @@ const userSchema = new mongoose.Schema({
     ],
     plan: { 
         type: mongoose.Schema.Types.ObjectId, ref: 'Plan' 
-    }
-        ,
+    },
+    consist: {
+        type:Number
+    },
 },{timestamps:true});
 
 const User = mongoose.model("User" , userSchema);
