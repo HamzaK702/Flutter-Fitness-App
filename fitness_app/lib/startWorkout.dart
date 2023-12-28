@@ -144,19 +144,19 @@ class _StartWorkoutScreenState extends State<StartWorkoutScreen> {
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Text(
           title,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Colors.white),
         ),
       ),
       ...exercises.map((exercise) => ListTile(
             title: Text(
               exercise.exercise,
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
             ),
             subtitle: Text(
               exercise.sets != null && exercise.reps != null
                 ? 'Sets: ${exercise.sets}, Reps: ${exercise.reps}'
                 : 'Time: ${exercise.time}',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.grey, fontSize: 12),
             ),
           )).toList(),
     ];
