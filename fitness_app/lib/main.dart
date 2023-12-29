@@ -1,5 +1,5 @@
  
-import 'package:fitness_app/Auth.dart';
+ 
 import 'package:fitness_app/bloc/plan_bloc.dart';
 import 'package:fitness_app/bloc/start_bloc.dart';
 import 'package:fitness_app/bloc/yoga_bloc.dart';

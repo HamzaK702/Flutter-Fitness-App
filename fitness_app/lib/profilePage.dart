@@ -1,3 +1,4 @@
+import 'package:fitness_app/widgets/darkTextFieldWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -37,29 +38,37 @@ class _DarkProfileFormState extends State<DarkProfileForm> {
           }
 
           return Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              DarkTextField(
-                label: 'First Name',
-                controller: _firstNameController,
-                onChanged: (value) => _onFieldChanged(),
-              ),
-              DarkTextField(
-                label: 'Last Name',
-                controller: _lastNameController,
-                onChanged: (value) => _onFieldChanged(),
-              ),
-              DarkTextField(
-                label: 'Height',
-                controller: _heightController,
-                onChanged: (value) => _onFieldChanged(),
-              ),
-              SizedBox(height: 20),
-              Visibility(
-                visible: isFormChanged,
-                child: ElevatedButton(
-                  onPressed: _updateUserDetails(user.id),
-                  child: Text('Update Details'),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  children: [
+                    DarkTextField(
+                      label: 'First Name',
+                      controller: _firstNameController,
+                      onChanged: (value) => _onFieldChanged(),
+                    ),
+                    DarkTextField(
+                      label: 'Last Name',
+                      controller: _lastNameController,
+                      onChanged: (value) => _onFieldChanged(),
+                    ),
+                    DarkTextField(
+                      label: 'Height',
+                      controller: _heightController,
+                      onChanged: (value) => _onFieldChanged(),
+                    ),
+                    SizedBox(height: 20),
+                    Visibility(
+                      visible: isFormChanged,
+                      child: ElevatedButton(
+                        onPressed: _updateUserDetails(user.id),
+                        child: Text('Update Details'),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -92,33 +101,33 @@ class _DarkProfileFormState extends State<DarkProfileForm> {
 }
 
 
-class DarkTextField extends StatelessWidget {
-  final String label;
-  final TextEditingController controller;
-  final ValueChanged<String>? onChanged;
+// class DarkTextField extends StatelessWidget {
+//   final String label;
+//   final TextEditingController controller;
+//   final ValueChanged<String>? onChanged;
 
-  DarkTextField({
-    required this.label,
-    required this.controller,
-    this.onChanged,
-  });
+//   DarkTextField({
+//     required this.label,
+//     required this.controller,
+//     this.onChanged,
+//   });
 
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      style: TextStyle(color: Colors.white),
-      decoration: InputDecoration(
-        labelText: label,
-        labelStyle: TextStyle(color: Colors.white),
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
-        ),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
-        ),
-      ),
-      onChanged: onChanged,
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return TextFormField(
+//       controller: controller,
+//       style: TextStyle(color: Colors.white),
+//       decoration: InputDecoration(
+//         labelText: label,
+//         labelStyle: TextStyle(color: Colors.white),
+//         enabledBorder: UnderlineInputBorder(
+//           borderSide: BorderSide(color: Colors.white),
+//         ),
+//         focusedBorder: UnderlineInputBorder(
+//           borderSide: BorderSide(color: Colors.white),
+//         ),
+//       ),
+//       onChanged: onChanged,
+//     );
+//   }
+// }

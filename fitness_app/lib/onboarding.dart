@@ -1,5 +1,6 @@
 //import 'package:fitness_app/Auth.dart';
 import 'package:fitness_app/AuthScreen.dart';
+import 'package:fitness_app/widgets/customButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -63,19 +64,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
                 Positioned(
                   bottom: 30,
-                  child: ElevatedButton(
-                    child: Text('GET STARTED', style: GoogleFonts.notoSans(
-                      textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black),
-                    )),
+                  child: CustomElevatedButton(
+                    buttonText: 'GET STARTED',
                     onPressed: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
                     },
-                    style: ElevatedButton.styleFrom(
-                      primary: Color(0xFFF2FF00),
-                      onPrimary: Colors.white,
-                      minimumSize: Size(200, 50),
-                    ),
-                  ),
+                    
+                  )
                 ),
               ],
             ),

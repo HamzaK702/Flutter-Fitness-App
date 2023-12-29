@@ -1,3 +1,6 @@
+import 'package:fitness_app/widgets/customButtonWidget.dart';
+import 'package:fitness_app/widgets/customTextButtonWidget.dart';
+import 'package:fitness_app/widgets/passwordFieldWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +11,7 @@ import 'package:fitness_app/home_bloc.dart';
 import 'package:fitness_app/home_event_state.dart';
 import 'Register.dart';
 import 'homepage.dart';
+import 'widgets/emailFieldWidget.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -36,11 +40,11 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-  image: DecorationImage(
-    image: AssetImage('assets/LOGO.png'),
-    fit: BoxFit.cover,
-  ),
-),
+              image: DecorationImage(
+                image: AssetImage('assets/LOGO.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -101,66 +105,21 @@ class _HomePageState extends State<HomePage> {
                       child: Column(
                         children: <Widget>[
                           // Email Field
-                         TextFormField(
-                          initialValue: 'hmzkhan@gmail.com',
-                  key: ValueKey('email'),
-                  validator: (value) {
-                    if (value!.isEmpty || !value.contains('@')) {
-                      return 'Please enter a valid email address.';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    _email = value!;
-                  },
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.grey[800],
-                    hintText: 'Email Address',
-                    prefixIcon: Icon(
-                      Icons.person,
-                      color: Colors.white70,
+                         EmailField(
+                            key: ValueKey('email'),
+                            initialValue: 'hmzkhan@gmail.com',
+                            onSaved: (value) {
+                              _email = value!;
+                            },
+                            ),
+                          SizedBox(height: 12),
+                          PasswordField(
+                            key: ValueKey('password'),
+                            initialValue: "hamza123",
+                            onSaved: (value) {
+                              _password = value!;
+                            },
                     ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                      borderSide: BorderSide.none,
-                    ),
-                    contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-                  ),
-                  style: TextStyle(color: Colors.white),
-                  obscureText: false,
-                ),
-                SizedBox(height: 12),
-                TextFormField(
-                  key: ValueKey('password'),
-                  initialValue: "hamza123",
-                  validator: (value) {
-                    if (value!.isEmpty || value.length < 7) {
-                      return 'Password must be at least 7 characters long.';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    _password = value!;
-                  },
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.grey[800],
-                    hintText: 'Password',
-                    prefixIcon: Icon(
-                      Icons.lock,
-                      color: Colors.white70,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                      borderSide: BorderSide.none,
-                    ),
-                    contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-                  ),
-                  style: TextStyle(color: Colors.white),
-                ),
                 SizedBox(height: 5),
                 if (_isLoading) CircularProgressIndicator(),
                 if (!_isLoading) 
@@ -176,36 +135,23 @@ class _HomePageState extends State<HomePage> {
                         ),
 
                         SizedBox(height: 10,),
-                         MaterialButton(
-                          onPressed: _trySubmit,
-                          height: 50,
-                          // margin: EdgeInsets.symmetric(horizontal: 50),
-                          color:  Color(0xFFF2FF00),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50),
-
-                          ),
-                          // decoration: BoxDecoration(
-                          // ),
-                          child: Center(
-                            child: Text("LOGIN", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),),
-                          ),
-                        ),
+                        CustomElevatedButton(
+                            buttonText: 'LOGIN',
+                            onPressed: 
+                             _trySubmit,
+                            ),
                         SizedBox(height: 100,),
-                         TextButton(
-                   child:  Text(
-                      "Don't have an account?",
-                      style: TextStyle(color: Colors.grey),
-                    ), 
-                   onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => RegisterScreen()),
-                      );
-                    },
-
-                  ), 
-                                     // Additional UI elements can be added here
+                        CustomTextButton(
+                              text: "Don't have an account?",
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => RegisterScreen()),
+                                );
+                              },
+                       
+                            )
+                                   
                         ],
                       ),
                     ),

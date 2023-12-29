@@ -1,5 +1,9 @@
-import 'package:fitness_app/Auth.dart';
+
 import 'package:fitness_app/AuthScreen.dart';
+import 'package:fitness_app/widgets/customTextButtonWidget.dart';
+import 'package:fitness_app/widgets/customTextFieldWidget.dart';
+import 'package:fitness_app/widgets/emailFieldWidget.dart';
+import 'package:fitness_app/widgets/passwordFieldWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:convert';
@@ -69,112 +73,39 @@ void _trySubmit() async {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                TextFormField(
-                  key: ValueKey('firstName'),
-                  onSaved: (value) {
-                    _firstName = value!;
-                  },
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.grey[800],
-                    hintText: 'First Name',
-                    prefixIcon: Icon(
-                      Icons.person,
-                      color: Colors.white70,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                      borderSide: BorderSide.none,
-                    ),
-                    contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-                  ),
-                  style: TextStyle(color: Colors.white),
-                  obscureText: false,
-                ),
+                CustomTextField(
+                                key: ValueKey('firstName'),
+                                onSaved: (value) {
+                                  _firstName = value!;
+                                },
+                                hintText: 'First Name',
+                                icon: Icons.person,
+                              ),
                 SizedBox(height: 12),
-                TextFormField(
-                  key: ValueKey('lastName'),
-                  onSaved: (value) {
-                    _lastName = value!;
-                  },
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.grey[800],
-                    hintText: 'Last Name',
-                    prefixIcon: Icon(
-                      Icons.person,
-                      color: Colors.white70,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                      borderSide: BorderSide.none,
-                    ),
-                    contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-                  ),
-                  style: TextStyle(color: Colors.white),
-                  obscureText: false,
-                ),
+                CustomTextField(
+                              key: ValueKey('lastName'),
+                              onSaved: (value) {
+                                _lastName = value!;
+                              },
+                              hintText: 'Last Name',
+                              icon: Icons.person,
+                            ),
                 SizedBox(height: 12),
-                TextFormField(
-                  key: ValueKey('email'),
-                  validator: (value) {
-                    if (value!.isEmpty || !value.contains('@')) {
-                      return 'Please enter a valid email address.';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    _email = value!;
-                  },
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.grey[800],
-                    hintText: 'Email Address',
-                    prefixIcon: Icon(
-                      Icons.email,
-                      color: Colors.white70,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                      borderSide: BorderSide.none,
-                    ),
-                    contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-                  ),
-                  style: TextStyle(color: Colors.white),
-                  obscureText: false,
-                ),
+                EmailField(
+                            key: ValueKey('email'),
+                            initialValue: 'hmzkhan@gmail.com',
+                            onSaved: (value) {
+                              _email = value!;
+                            },
+                            ),
                 SizedBox(height: 12),
-                TextFormField(
-                  key: ValueKey('password'),
-                  validator: (value) {
-                    if (value!.isEmpty || value.length < 7) {
-                      return 'Password must be at least 7 characters long.';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    _password = value!;
-                  },
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.grey[800],
-                    hintText: 'Password',
-                    prefixIcon: Icon(
-                      Icons.lock,
-                      color: Colors.white70,
+                PasswordField(
+                            key: ValueKey('password'),
+                            initialValue: "hamza123",
+                            onSaved: (value) {
+                              _password = value!;
+                            },
                     ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                      borderSide: BorderSide.none,
-                    ),
-                    contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-                  ),
-                  style: TextStyle(color: Colors.white),
-                ),
                 SizedBox(height: 20),
                 if (_isLoading) CircularProgressIndicator(),
                 if (!_isLoading) 
@@ -195,20 +126,19 @@ void _trySubmit() async {
                       minimumSize: Size(200, 50), // Button size
                     ),
             ),
-                 
+                SizedBox(height: 20),
                 if (!_isLoading) 
-                  TextButton(
-                   child: Text('Create new account', style: GoogleFonts.notoSans(
-                textStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white),
-              ),), 
-                   onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => RegisterScreen()),
-                      );
-                    },
+                  CustomTextButton(
+                              text: "Already have an account?",
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => HomePage()),
+                                );
+                              },
+                       
+                            )
 
-                  ),
               ],
             ),
           ),
@@ -216,6 +146,10 @@ void _trySubmit() async {
       ),
     );
   }
+                 
+                    } 
 
-  // Add validation and submission logic
-}
+                   
+   
+
+ 
