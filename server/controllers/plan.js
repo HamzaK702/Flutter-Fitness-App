@@ -96,3 +96,36 @@ function muscleName(split, count) {
     }
 }
 
+export const finishWorkout = async (req, res) => {
+    const userId = req.body.userId;
+    
+    if (!userId || !mongoose.Types.ObjectId.isValid(userId)) {
+        return res.status(400).send('Invalid user ID');
+    }
+    
+    try {
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+    
+        // Find plans associated with this user and increment count
+        const plans = await Plan.find({ userId: userId });
+        if (plans.length === 0) {
+            return res.status(404).send('No plans found for this user');
+        }
+    
+        for (const plan of plans) {
+            plan.count = (plan.count || 0) + 1;
+            await plan.save();
+        }
+    
+        // Increment consist in the user
+        user.consist = (user.consist || 0) + 1;
+        await user.save();
+    
+        res.send({ message: 'Workout completed successfully', user, plans });
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+    }

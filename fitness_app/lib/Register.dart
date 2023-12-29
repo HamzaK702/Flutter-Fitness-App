@@ -47,7 +47,7 @@ void _trySubmit() async {
 
     if (response.statusCode == 200 ) {
       print('Registered successfully');
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AuthScreen()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
 
     } else {
       print('Registration failed');
@@ -178,33 +178,33 @@ void _trySubmit() async {
                 SizedBox(height: 20),
                 if (_isLoading) CircularProgressIndicator(),
                 if (!_isLoading) 
-                 SizedBox(height: 40,),
-                         MaterialButton(
-                          onPressed: _trySubmit,
-                          height: 50,
-                          // margin: EdgeInsets.symmetric(horizontal: 50),
-                          color:  Color(0xFFF2FF00),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50),
-
-                          ),
-                          // decoration: BoxDecoration(
-                          // ),
-                          child: Center(
-                            child: Text("REGISTER", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),),
-                          ),
-                        ),
+                 ElevatedButton(
+                    child: Text('Register', style: GoogleFonts.notoSans(
+                textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+              ),), 
+                  onPressed: () {
+                       if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                        _trySubmit();
+                        // Perform login logic here
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xFFF2FF00), // Button color
+                      onPrimary: Colors.white, // Text color
+                      minimumSize: Size(200, 50), // Button size
+                    ),
+            ),
                  
                 if (!_isLoading) 
                   TextButton(
-                   child: Text(
-                      "Already have an account?",
-                      style: TextStyle(color: Colors.grey),
-                    ), 
+                   child: Text('Create new account', style: GoogleFonts.notoSans(
+                textStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white),
+              ),), 
                    onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => HomePage()),
+                        MaterialPageRoute(builder: (context) => RegisterScreen()),
                       );
                     },
 

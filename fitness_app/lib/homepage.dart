@@ -2,12 +2,15 @@
   
 import 'package:fitness_app/bloc/plan_bloc.dart';
 import 'package:fitness_app/bloc/start_bloc.dart';
+import 'package:fitness_app/bloc/yoga_bloc.dart';
 import 'package:fitness_app/exercise.dart';
 import 'package:fitness_app/home_bloc.dart';
 import 'package:fitness_app/home_event_state.dart';
 import 'package:fitness_app/login_bloc.dart';
 import 'package:fitness_app/login_event_state.dart';
 import 'package:fitness_app/planWorkout.dart';
+import 'package:fitness_app/profilePage.dart';
+import 'package:fitness_app/yoga.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -161,15 +164,15 @@ Widget buildHorizontalScrollSection2(BuildContext context) {
                     // Handle the error or show a message
                     print('Could not launch $url');
                  }
-      },
-      child: SizedBox(
-        height: 180,
-        width: 230,
-        child: buildCardioSections(context, "assets/ABS1.jpg"),
-      ),
-    ),
-  ),
-),
+                    },
+                    child: SizedBox(
+                      height: 180,
+                      width: 230,
+                      child: buildCardioSections(context, "assets/ABS1.jpg"),
+                    ),
+                  ),
+                ),
+              ),
           Padding(
             padding: EdgeInsets.only(left: 12.0),
             child: Align(
@@ -183,15 +186,15 @@ Widget buildHorizontalScrollSection2(BuildContext context) {
                     // Handle the error or show a message
                     print('Could not launch $url');
                  }
-      },
-      child: SizedBox(
-        height: 180,
-        width: 230,
-        child: buildCardioSections(context, "assets/ABSmid.jpg"),
-      ),
-    ),
-  ),
-),
+                  },
+                  child: SizedBox(
+                    height: 180,
+                    width: 230,
+                    child: buildCardioSections(context, "assets/ABSmid.jpg"),
+                  ),
+                ),
+              ),
+            ),
           Padding(
             padding: EdgeInsets.only(left: 12.0),
             child: Align(
@@ -228,10 +231,20 @@ Widget buildHorizontalScrollSection(BuildContext context) {
           padding: EdgeInsets.only(left: 12.0),
           child: Align(
             alignment: Alignment.centerLeft,
-            child: SizedBox(
-              height: 180,
-              width: 230,
-              child: buildStretchSection(context),
+            child: InkWell(
+              onTap: () {
+                print("Stretch tapped");
+                context.read<YogaBloc>().add(YogaRequested(Day: 'Stretch'));
+                     Navigator.push(
+                        context, 
+                        MaterialPageRoute(builder: (context) => YogaPage()),
+                      );
+              },
+              child: SizedBox(
+                height: 180,
+                width: 230,
+                child: buildStretchSection(context),
+              ),
             ),
           ),
         ),
@@ -239,10 +252,21 @@ Widget buildHorizontalScrollSection(BuildContext context) {
           padding: EdgeInsets.only(left: 12.0),
           child: Align(
             alignment: Alignment.centerLeft,
-            child: SizedBox(
-              height: 180,
-              width: 230,
-              child: buildYogaSection(context),
+            child: InkWell(
+              onTap: () {
+                print("yoga tapped");
+                context.read<YogaBloc>().add(YogaRequested(Day: 'Yoga'));
+                     Navigator.push(
+                        context, 
+                        MaterialPageRoute(builder: (context) => YogaPage()),
+                      );
+                
+              },
+              child: SizedBox(
+                height: 180,
+                width: 230,
+                child: buildYogaSection(context),
+              ),
             ),
           ),
         ),
@@ -250,10 +274,20 @@ Widget buildHorizontalScrollSection(BuildContext context) {
           padding: EdgeInsets.only(left: 12.0),
           child: Align(
             alignment: Alignment.centerLeft,
-            child: SizedBox(
-              height: 180,
-              width: 230,
-              child: buildMeditationSection(context),
+            child: InkWell(
+              onTap: () {
+                print("cooldown tapped");
+                context.read<YogaBloc>().add(YogaRequested(Day: 'Cooldown'));
+                     Navigator.push(
+                        context, 
+                        MaterialPageRoute(builder: (context) => YogaPage()),
+                      );
+              },
+              child: SizedBox(
+                height: 180,
+                width: 230,
+                child: buildMeditationSection(context),
+              ),
             ),
           ),
         ),
@@ -261,6 +295,7 @@ Widget buildHorizontalScrollSection(BuildContext context) {
     ),
   );
 }
+
 
      Widget buildTimeSpentCard() {
     return SizedBox(
@@ -398,9 +433,7 @@ Widget buildHorizontalScrollSection(BuildContext context) {
           ],
         ),
       );
-      
-    
-  }
+       }
 
 Widget buildMeditationSection(BuildContext context) {
     return Card(
@@ -588,8 +621,15 @@ Widget buildMeditationSection(BuildContext context) {
   }
 
   Widget buildProfilePage(BuildContext context) {
-    
-    return Text('Profile Page');
+      return Scaffold(
+ 
+ 
+  backgroundColor: Colors.black, // Scaffold background color set to black
+  body: Padding(
+    padding: EdgeInsets.all(16.0),
+    child: DarkProfileForm(), // Replace with your custom form widget
+  ),
+);
   }
-}
 
+}

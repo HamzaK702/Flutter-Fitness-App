@@ -51,6 +51,43 @@ export const registerUser = async (req, res) => {
     }
 };
 
+export const updateUser = async (req, res) => {
+    try {
+      const userId = req.params.userId;
+      const {
+        firstName,
+        lastName,
+        email,
+        height,
+        weight,
+        consist,
+      } = req.body;
+  
+      // Find the user by their ID
+      const user = await User.findById(userId);
+  
+      if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+  
+      // Update the user's information
+      user.firstName = firstName || user.firstName;
+      user.lastName = lastName || user.lastName;
+      user.email = email || user.email;
+      user.height = height || user.height;
+      user.weight = weight || user.weight;
+      user.consist = consist || user.consist;
+  
+      // Save the updated user
+      const updatedUser = await user.save();
+  
+      res.status(200).json(updatedUser);
+    } catch (err) {
+      console.error('Error updating user:', err);
+      res.status(500).json({ error: err.message });
+    }
+  };
+
 
 
 

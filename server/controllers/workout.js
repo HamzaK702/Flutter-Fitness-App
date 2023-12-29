@@ -12,6 +12,7 @@ export const addWorkout = async (req, res) => {
 }
 
 
+
 export const getWorkout = async (req, res) => {
   
 try{
@@ -28,3 +29,5 @@ try{
     res.status(500).send('Error retrieving workout: ' + error.message);
   }
 }
+
+

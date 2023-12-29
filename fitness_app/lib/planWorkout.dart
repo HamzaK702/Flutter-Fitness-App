@@ -91,7 +91,7 @@ class _WorkoutPlanPageState extends State<WorkoutPlanPage> {
                     onPressed: () {
                       context.read<PlanBloc>().add(UpdatePlan(userId: widget.userId, split: selectedValue!));
                       Future.delayed(Duration(seconds: 1), () {
-                        context.read<DayBloc>().add(DayRequested(id: widget.userId));
+                      context.read<DayBloc>().add(DayRequested(id: widget.userId));
                       });
 
                       BlocListener<DayBloc, DayState>(

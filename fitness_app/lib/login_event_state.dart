@@ -49,6 +49,55 @@ class User {
     );
   }
 }
+class UpdateConsistRequested extends LoginEvent {
+  // You can include any additional data needed for the update here
+  // For example, you might need to pass the user's ID or other details
+  final String userId;
+
+  UpdateConsistRequested({required this.userId});
+
+  @override
+  List<Object> get props => [userId];
+}
+
+class UpdateDetailsRequested extends LoginEvent {
+  // You can include any additional data needed for the update here
+  // For example, you might need to pass the user's ID or other details
+  final String id;
+  final String firstName;
+  final String lastName;
+  final String height;
+  
+  UpdateDetailsRequested({ 
+    required this.id,
+    required this.firstName,
+    required this.lastName,
+    required this.height,
+    });
+
+  @override
+  List<Object> get props => [id, firstName, lastName, height];
+}
+
+class UpdateLoginRequested extends LoginEvent {
+  final String id;
+  final String firstName;
+  final String lastName;
+  final int consist;
+  final int weight;
+  final String height;
+  final String email;
+
+  UpdateLoginRequested({
+    required this.id,
+    required this.firstName,
+    required this.lastName,
+    required this.consist,
+    required this.weight,
+    required this.height,
+    required this.email,
+  });
+}
 
 class LoginSuccess extends LoginState {
   final User user;

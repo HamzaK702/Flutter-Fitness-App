@@ -75,8 +75,8 @@ class _StartWorkoutScreenState extends State<StartWorkoutScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            _buildExerciseDetails(workout),
-            _buildNavigationButtons(workout),
+            //_buildExerciseDetails(workout),
+            //_buildNavigationButtons(workout),
           ],
         ),
       ),
@@ -110,33 +110,45 @@ class _StartWorkoutScreenState extends State<StartWorkoutScreen> {
     }
   }
 
-  Widget _buildNavigationButtons(Workout workout) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        IconButton(
-          icon: Icon(Icons.arrow_left, color: Colors.white),
+ Widget _buildNavigationButtons(Workout workout) {
+  bool isLastExercise = currentExerciseIndex == workout.totalExercises() - 1;
+ print("this is the last exercise " + (workout.totalExercises() - 1).toString());
+ if (isLastExercise) 
+ {
+  print("this is the last exercise " + (workout.totalExercises() - 1).toString());
+ }
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      IconButton(
+        icon: Icon(Icons.arrow_left, color: Colors.white),
+        onPressed: currentExerciseIndex > 0 ? () {
+          setState(() {
+            currentExerciseIndex--;
+          });
+        } : null,
+      ),
+      if (isLastExercise) 
+      
+        ElevatedButton(
           onPressed: () {
-            if (currentExerciseIndex > 0) {
-              setState(() {
-                currentExerciseIndex--;
-              });
-            }
+            // Logic for finishing the workout
           },
+          child: Text('Finish Workout'),
+          style: ElevatedButton.styleFrom(primary: Colors.white, onPrimary: Colors.black),
         ),
+      if (!isLastExercise)
         IconButton(
           icon: Icon(Icons.arrow_right, color: Colors.white),
-          onPressed: () {
-            if (currentExerciseIndex < workout.totalExercises() - 1) {
-              setState(() {
-                currentExerciseIndex++;
-              });
-            }
-          },
+          onPressed: currentExerciseIndex < workout.totalExercises() - 1 ? () {
+            setState(() {
+              currentExerciseIndex++;
+            });
+          } : null,
         ),
-      ],
-    );
-  }
+    ],
+  );
+}
 
   List<Widget> _buildExerciseList(BuildContext context, String title, List<ExerciseDetail> exercises) {
     return [
