@@ -1,7 +1,7 @@
-import 'package:fitness_app/bloc/plan_bloc.dart';
-import 'package:fitness_app/bloc/start_bloc.dart';
-import 'package:fitness_app/home_bloc.dart';
-import 'package:fitness_app/home_event_state.dart';
+import 'package:fitness_app/bloc/home/home_bloc.dart';
+import 'package:fitness_app/bloc/home/home_event_state.dart';
+import 'package:fitness_app/bloc/plan/plan_bloc.dart';
+import 'package:fitness_app/bloc/start/start_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';

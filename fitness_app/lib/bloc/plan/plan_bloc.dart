@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:fitness_app/home_event_state.dart';
+import 'package:fitness_app/bloc/home/home_event_state.dart';
+
 
 import 'package:meta/meta.dart';
 

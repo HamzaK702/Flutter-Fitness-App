@@ -1,9 +1,8 @@
+import 'package:fitness_app/bloc/login/login_bloc.dart';
+import 'package:fitness_app/bloc/login/login_event_state.dart';
 import 'package:fitness_app/widgets/darkTextFieldWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'login_bloc.dart'; // Replace with your actual login_bloc.dart import
-import 'login_event_state.dart'; // Replace with your actual login_event_state.dart import
 
 class DarkProfileForm extends StatefulWidget {
   @override

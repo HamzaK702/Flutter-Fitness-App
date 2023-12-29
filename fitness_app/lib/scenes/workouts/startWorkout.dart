@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fitness_app/bloc/start_bloc.dart'; // Replace with your actual path
-import 'package:fitness_app/bloc/workoutModel.dart';
+import 'package:fitness_app/bloc/start/start_bloc.dart'; // Replace with your actual path
+
 import 'package:flutter_bloc/flutter_bloc.dart'; // Replace with your actual path
 
 class StartWorkoutScreen extends StatefulWidget {

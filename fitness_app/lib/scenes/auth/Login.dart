@@ -1,17 +1,18 @@
+import 'package:fitness_app/bloc/home/home_bloc.dart';
+import 'package:fitness_app/bloc/home/home_event_state.dart';
+import 'package:fitness_app/bloc/login/login_bloc.dart';
+import 'package:fitness_app/bloc/login/login_event_state.dart';
+import 'package:fitness_app/scenes/main/homepage.dart';
 import 'package:fitness_app/widgets/customButtonWidget.dart';
 import 'package:fitness_app/widgets/customTextButtonWidget.dart';
+import 'package:fitness_app/widgets/emailFieldWidget.dart';
 import 'package:fitness_app/widgets/passwordFieldWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:fitness_app/login_bloc.dart';
-import 'package:fitness_app/login_event_state.dart';
-import 'package:fitness_app/home_bloc.dart';
-import 'package:fitness_app/home_event_state.dart';
 import 'Register.dart';
-import 'homepage.dart';
-import 'widgets/emailFieldWidget.dart';
+
 
 class HomePage extends StatefulWidget {
   @override

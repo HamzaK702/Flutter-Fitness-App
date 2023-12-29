@@ -1,4 +1,4 @@
-import 'package:fitness_app/bloc/start_bloc.dart';
+import 'package:fitness_app/bloc/start/start_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'home_event_state.dart';
 import 'package:http/http.dart' as http;

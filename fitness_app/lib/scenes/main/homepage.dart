@@ -1,16 +1,16 @@
 
   
-import 'package:fitness_app/bloc/plan_bloc.dart';
-import 'package:fitness_app/bloc/start_bloc.dart';
-import 'package:fitness_app/bloc/yoga_bloc.dart';
-import 'package:fitness_app/exercise.dart';
-import 'package:fitness_app/home_bloc.dart';
-import 'package:fitness_app/home_event_state.dart';
-import 'package:fitness_app/login_bloc.dart';
-import 'package:fitness_app/login_event_state.dart';
-import 'package:fitness_app/planWorkout.dart';
-import 'package:fitness_app/profilePage.dart';
-import 'package:fitness_app/yoga.dart';
+import 'package:fitness_app/bloc/home/home_bloc.dart';
+import 'package:fitness_app/bloc/home/home_event_state.dart';
+import 'package:fitness_app/bloc/login/login_bloc.dart';
+import 'package:fitness_app/bloc/login/login_event_state.dart';
+import 'package:fitness_app/bloc/plan/plan_bloc.dart';
+import 'package:fitness_app/bloc/start/start_bloc.dart';
+import 'package:fitness_app/bloc/yoga/yoga_bloc.dart';
+import 'package:fitness_app/scenes/workouts/exercise.dart';
+import 'package:fitness_app/scenes/plan/planWorkout.dart';
+import 'package:fitness_app/scenes/main/profilePage.dart';
+import 'package:fitness_app/scenes/workouts/yoga.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';

@@ -1,13 +1,10 @@
 
-import 'package:fitness_app/bloc/start_bloc.dart';
-import 'package:fitness_app/bloc/workoutModel.dart';
-import 'package:fitness_app/login_bloc.dart';
-import 'package:fitness_app/login_event_state.dart';
+import 'package:fitness_app/bloc/models/workoutModel.dart';
+import 'package:fitness_app/bloc/yoga/yoga_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+
 
 
 class ExerciseBottomSheet extends StatefulWidget {
@@ -77,7 +74,7 @@ class _ExerciseBottomSheetState extends State<ExerciseBottomSheet> {
                 ),
               ),
               onPressed: () {
-                    _UpdateCounter(context);
+                   
                     Navigator.of(context).pop();
                   },
               style: ElevatedButton.styleFrom(
@@ -105,22 +102,10 @@ class _ExerciseBottomSheetState extends State<ExerciseBottomSheet> {
   }
 }
 
-void _UpdateCounter(BuildContext context) {
-  print("Update counter is called");
-
-  // Accessing the Bloc state directly
-  final loginState = context.read<LoginBloc>().state;
-
-  if (loginState is LoginSuccess) {
-    final newUserId = loginState.user.id;
-    context.read<LoginBloc>().add(UpdateConsistRequested(userId: newUserId));
-    
-  }
-}
 
 
 
-class MainPage extends StatelessWidget {
+class YogaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -129,17 +114,17 @@ class MainPage extends StatelessWidget {
         backgroundColor: Colors.black,  // Optional: Set AppBar color to black
       ),
       backgroundColor: Colors.black,  // Set the background color of the page
-      body: BlocBuilder<StartBloc, StartState>(
+      body: BlocBuilder<YogaBloc, YogaState>(
         builder: (context, state) {
-          if (state is StartInitial) {
+          if (state is YogaInitial) {
             return Center(
               child: Text('Select a day to start', style: TextStyle(color: Colors.white)),
             );
-          } else if (state is StartLoading) {
+          } else if (state is YogaLoading) {
             return Center(child: CircularProgressIndicator());
-          } else if (state is StartLoadedState) {
+          } else if (state is YogaLoadedState) {
             return _buildStartWorkoutSection(context, state);
-          } else if (state is StartErrorState) {
+          } else if (state is YogaErrorState) {
             return Center(
               child: Text('Error: ${state.message}', style: TextStyle(color: Colors.white)),
             );
@@ -150,7 +135,7 @@ class MainPage extends StatelessWidget {
       ),
     );
   }
-Widget _buildStartWorkoutSection(BuildContext context, StartLoadedState state) {
+Widget _buildStartWorkoutSection(BuildContext context, YogaLoadedState state) {
   return SingleChildScrollView( // Wrap with SingleChildScrollView
     child: Column(
       mainAxisSize: MainAxisSize.min,
@@ -191,7 +176,7 @@ Widget _buildStartWorkoutSection(BuildContext context, StartLoadedState state) {
             alignment: Alignment.topCenter,
             child: ElevatedButton(
               child: Text(
-                'START WORKOUT',
+                'START YOGA',
                 style: GoogleFonts.notoSans(
                   textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black),
                 ),

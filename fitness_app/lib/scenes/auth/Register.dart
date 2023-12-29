@@ -1,5 +1,5 @@
 
-import 'package:fitness_app/AuthScreen.dart';
+import 'package:fitness_app/scenes/auth/login.dart';
 import 'package:fitness_app/widgets/customTextButtonWidget.dart';
 import 'package:fitness_app/widgets/customTextFieldWidget.dart';
 import 'package:fitness_app/widgets/emailFieldWidget.dart';
@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-// import other necessary packages
+ 
 
 class RegisterScreen extends StatefulWidget {
   @override
