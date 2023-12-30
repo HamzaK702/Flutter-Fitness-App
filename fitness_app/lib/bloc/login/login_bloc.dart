@@ -9,31 +9,17 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LoginRequested>(_onLoginRequested);
     on<UpdateConsistRequested>(_onUpdateConsistRequested);
     on<UpdateDetailsRequested>(_onUpdateDetailsRequested);
-     // New event
+     
   }
 
   Future<void> _onLoginRequested(LoginRequested event, Emitter<LoginState> emit) async {
     emit(LoginLoading());
     try {
-      print("it is calling the API: ${event.email} and ${event.password}");
-      final response = await http.post(
-        Uri.parse('http://localhost:3001/auth/login'),
-        headers: {'Content-Type': 'application/json'},
-        body: json.encode({
-          'email': event.email,
-          'password': event.password,
-        }),
-      );
-      if (response.statusCode == 200) {
-        final responseData = json.decode(response.body);
-        final user = User.fromJson(responseData['user']);
-        final token = responseData['token'];
-        emit(LoginSuccess(user: user, token: token));
-        print("Login successful");
-        print("User: ${user} and token: ${token}");
-      } else {
-        emit(LoginFailure('Login Failed'));
-      }
+      final responseData = await loginUser(event.email, event.password);
+      final user = User.fromJson(responseData['user']);
+      final token = responseData['token'];
+      emit(LoginSuccess(user: user, token: token));
+      print("Login successful: User: ${user} and token: ${token}");
     } catch (e) {
       emit(LoginFailure(e.toString()));
     }
@@ -57,7 +43,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       // Update the user's consist value in the state
      
 
-      // Make the API call
+       
       await _makeUpdateApiCall( 
         userId: updatedUser.id,
         firstName: updatedUser.firstName,
@@ -111,7 +97,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 }
 
 
-  // New event handler to update user's consist value
+   
   Future<void> _onUpdateConsistRequested(UpdateConsistRequested event, Emitter<LoginState> emit) async {
     final loginState = state;
     if (loginState is LoginSuccess) {
@@ -130,12 +116,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(updatedLoginState);
 
       // Make the API call
-      await _makeApiCall(updatedUser.id);
+      await _makeUpdateConsistApiCall(updatedUser.id);
        
     }
   }
 
-  Future<void> _makeApiCall(String userId) async {
+  Future<void> _makeUpdateConsistApiCall(String userId) async {
     final String apiUrl = 'http://localhost:3001/plan/finishWorkout';
     try {
       final response = await http.post(
@@ -158,6 +144,24 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
   }
 }
+
+Future<Map<String, dynamic>> loginUser(String email, String password) async {
+  final response = await http.post(
+    Uri.parse('http://localhost:3001/auth/login'),
+    headers: {'Content-Type': 'application/json'},
+    body: json.encode({
+      'email': email,
+      'password': password,
+    }),
+  );
+
+  if (response.statusCode == 200) {
+    return json.decode(response.body);
+  } else {
+    throw Exception('Login Failed');
+  }
+}
+
 
 
   

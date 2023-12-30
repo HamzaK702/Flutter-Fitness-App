@@ -28,7 +28,7 @@ class PasswordField extends StatelessWidget {
         filled: true,
         fillColor: Colors.grey[800],
         hintText: 'Password',
-        prefixIcon: Icon(
+        prefixIcon: const Icon(
           Icons.lock,
           color: Colors.white70,
         ),
@@ -36,9 +36,9 @@ class PasswordField extends StatelessWidget {
           borderRadius: BorderRadius.circular(30.0),
           borderSide: BorderSide.none,
         ),
-        contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+        contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
       ),
-      style: TextStyle(color: Colors.white),
+      style: const TextStyle(color: Colors.white),
     );
   }
 }

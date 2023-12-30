@@ -297,7 +297,7 @@ Widget buildHorizontalScrollSection(BuildContext context) {
 }
 
 
-     Widget buildTimeSpentCard() {
+  Widget buildTimeSpentCard() {
     return SizedBox(
       height: 75,
       child: Card(
@@ -318,7 +318,7 @@ Widget buildHorizontalScrollSection(BuildContext context) {
   }
 
 
-  @override
+   
   Widget buildSections(BuildContext context, ID, dayInfo, consistency) {
     return  Padding(
         padding: const EdgeInsets.all(8.0),

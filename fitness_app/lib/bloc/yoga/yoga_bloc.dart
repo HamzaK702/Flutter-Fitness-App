@@ -1,35 +1,24 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fitness_app/bloc/models/workoutModel.dart';
- 
-import 'package:meta/meta.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-
+import 'package:fitness_app/bloc/yoga/yoga_repository.dart';
+ import 'package:meta/meta.dart';
 part 'yoga_event.dart';
 part 'yoga_state.dart';
 
-class YogaBloc extends Bloc<YogaEvent, YogaState> {
-  YogaBloc() : super(YogaInitial()) {
-    on<YogaRequested>(_onWorkoutRequested);
-    }  
+ 
 
-Future<void> _onWorkoutRequested(YogaRequested event, Emitter<YogaState> emit) async {
-    print("api was called: event: ${event.Day}");
+class YogaBloc extends Bloc<YogaEvent, YogaState> {
+final  YogaRepository yogaRepository ;
+  YogaBloc(this.yogaRepository) : super(YogaInitial()) {
+    on<YogaRequested>(_onWorkoutRequested);
+  }  
+
+  Future<void> _onWorkoutRequested(YogaRequested event, Emitter<YogaState> emit) async {
     emit(YogaLoading());
     try {
-    final response = await http.get(
-      Uri.parse('http://localhost:3001/plan/getExercises').replace(queryParameters: {
-    'day': event.Day,
-    }),
-    );
-    if (response.statusCode == 200) {
-        final responseData = json.decode(response.body);
-        final data = Workout.fromJson(responseData);
-         emit(YogaLoadedState(data: data));
-      } else {
-        emit(YogaErrorState('Day retrieval failed'));
-      }
+      final data = await yogaRepository.fetchWorkout(event.Day);
+      emit(YogaLoadedState(data: data));
     } catch (e) {
       emit(YogaErrorState(e.toString()));
     }
@@ -38,11 +27,5 @@ Future<void> _onWorkoutRequested(YogaRequested event, Emitter<YogaState> emit) a
 
 
 
-
-
-      
-   
-   
-
-
  
+

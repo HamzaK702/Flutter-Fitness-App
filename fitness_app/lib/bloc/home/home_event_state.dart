@@ -36,6 +36,8 @@ class Split {
       // Parse other fields
     );
   }
+
+  get split => null;
 }
 
 class DaySuccess extends DayState {
