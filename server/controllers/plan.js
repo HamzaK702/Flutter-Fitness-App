@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import Plan from "../models/Plan.js";
+import WorkoutHistory from "../models/workoutHistory.js";
 import mongoose from "mongoose";
 
 export const selectPlan = async (req, res) => {
@@ -129,3 +130,47 @@ export const finishWorkout = async (req, res) => {
         res.status(500).send(error.message);
     }
     }
+
+
+    export const historyWorkout = async (req, res) => {
+        try {
+          const { userId, workoutName } = req.body;
+        
+          // Create a new workout entry
+          const newWorkout = { name: workoutName, date: new Date() };
+        
+          // Find the user's workout history and update it
+          const result = await WorkoutHistory.findOneAndUpdate(
+              { userId: mongoose.Types.ObjectId(userId) },
+              { $push: { previousWorkouts: newWorkout } },
+              { new: true, upsert: true }  
+          );
+        
+          res.status(200).json({ message: 'Workout added successfully', result });
+        } catch (error) {
+          res.status(500).json({ message: 'Error adding workout', error });
+        }
+        }
+
+
+export const getHistory = async (req, res) => {
+    try {
+        const userId = req.query.userId; // Getting the userId from query parameters
+
+        if (!userId) {
+            return res.status(400).json({ message: 'UserId is required' });
+        }
+
+        // Find the workout history for the user
+        const history = await WorkoutHistory.findOne({ userId: userId }).sort({'previousWorkouts.date': -1});
+
+        if (!history) {
+            return res.status(404).json({ message: 'Workout history not found' });
+        }
+
+        res.status(200).json(history);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error retrieving workout history', error });
+    }
+        }

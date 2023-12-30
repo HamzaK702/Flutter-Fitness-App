@@ -1,5 +1,7 @@
  
  
+import 'package:fitness_app/bloc/history/history_bloc.dart';
+import 'package:fitness_app/bloc/history/history_repository.dart';
 import 'package:fitness_app/bloc/home/home_bloc.dart';
 import 'package:fitness_app/bloc/login/login_bloc.dart';
 import 'package:fitness_app/bloc/plan/plan_bloc.dart';
@@ -31,6 +33,9 @@ void main() {
         ),
          BlocProvider<YogaBloc>(
           create: (context) => YogaBloc(YogaRepository()),
+        ),
+        BlocProvider<HistoryBloc>(
+          create: (context) => HistoryBloc(HistoryRepository()),
         ),
       ],
       child: MyApp(),

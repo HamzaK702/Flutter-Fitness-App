@@ -82,7 +82,9 @@ flutter:
     - assets/Fullbody.png
     - assets/Full Body.png
     - assets/Upper Body.png
+    - assets/Lower Body.png
     - assets/Chest.png
+    - assets/Shoulders.png
     - assets/Back.png
     - assets/Arms.png
     - assets/Stretch.png

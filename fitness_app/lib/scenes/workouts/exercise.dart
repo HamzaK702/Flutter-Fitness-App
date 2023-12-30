@@ -1,13 +1,16 @@
-
+import 'package:fitness_app/bloc/history/history_bloc.dart';
+import 'package:fitness_app/bloc/home/home_bloc.dart';
+import 'package:fitness_app/bloc/home/home_event_state.dart';
 import 'package:fitness_app/bloc/login/login_bloc.dart';
 import 'package:fitness_app/bloc/login/login_event_state.dart';
 import 'package:fitness_app/bloc/start/start_bloc.dart';
 import 'package:fitness_app/bloc/models/workoutModel.dart';
+import 'package:fitness_app/widgets/ExerciseDetailWidget.dart';
+import 'package:fitness_app/widgets/customButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+
 
 
 class ExerciseBottomSheet extends StatefulWidget {
@@ -56,9 +59,10 @@ class _ExerciseBottomSheetState extends State<ExerciseBottomSheet> {
         children: [
           Text(category, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
           SizedBox(height: 20),
-          Text(currentExercise.exercise, style: TextStyle(fontSize: 18, color: Colors.white)),
-          SizedBox(height: 10),
-          Text(currentExercise.sets != null ? 'Sets: ${currentExercise.sets}, Reps: ${currentExercise.reps}' : 'Time: ${currentExercise.time}', style: TextStyle(color: Colors.white)),
+          ExerciseDetailWidget(exerciseDetail: currentExercise),
+          // Text(currentExercise.exercise, style: TextStyle(fontSize: 18, color: Colors.white)),
+          // SizedBox(height: 10),
+          // Text(currentExercise.sets != null ? 'Sets: ${currentExercise.sets}, Reps: ${currentExercise.reps}' : 'Time: ${currentExercise.time}', style: TextStyle(color: Colors.white)),
           SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -69,23 +73,14 @@ class _ExerciseBottomSheetState extends State<ExerciseBottomSheet> {
             ),
             Spacer(),
             if (isLastExercise)
-              ElevatedButton(
-              child: Text(
-                'Finish Workout',
-                style: GoogleFonts.notoSans(
-                  textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black),
-                ),
-              ),
-              onPressed: () {
-                    _UpdateCounter(context);
-                    Navigator.of(context).pop();
-                  },
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xFFF2FF00),
-                onPrimary: Colors.white,
-                minimumSize: Size(200, 50),
-              ),
-            ),
+             CustomElevatedButton(
+                    buttonText: 'FINISH WORKOUT',
+                    onPressed: () {
+                     _UpdateCounter(context);
+                     Navigator.of(context).pop();
+                    },
+                    
+                  ),
               Spacer(),
              IconButton(
                 icon: Icon(Icons.arrow_forward_ios, color: Colors.white),
@@ -110,13 +105,19 @@ void _UpdateCounter(BuildContext context) {
 
   // Accessing the Bloc state directly
   final loginState = context.read<LoginBloc>().state;
-
+  final dayState = context.read<DayBloc>().state;
   if (loginState is LoginSuccess) {
     final newUserId = loginState.user.id;
     context.read<LoginBloc>().add(UpdateConsistRequested(userId: newUserId));
+    if (dayState is DaySuccess) {
+      final workout = dayState.day;
+      context.read<HistoryBloc>().add(UpdateHistory(userId: newUserId, workoutName: workout));
+    }
     
   }
 }
+
+ 
 
 
 
@@ -189,20 +190,12 @@ Widget _buildStartWorkoutSection(BuildContext context, StartLoadedState state) {
           padding: const EdgeInsets.all(20),
           child: Align(
             alignment: Alignment.topCenter,
-            child: ElevatedButton(
-              child: Text(
-                'START WORKOUT',
-                style: GoogleFonts.notoSans(
-                  textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black),
-                ),
-              ),
-              onPressed: () => _showExerciseBottomSheet(context, state.data),
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xFFF2FF00),
-                onPrimary: Colors.white,
-                minimumSize: Size(200, 50),
-              ),
-            ),
+            child: 
+            CustomElevatedButton(
+                    buttonText: 'START WORKOUT',
+                    onPressed: () => _showExerciseBottomSheet(context, state.data)
+                    
+                  ),
           ),
         ),
       ],

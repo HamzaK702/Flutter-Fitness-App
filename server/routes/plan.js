@@ -1,10 +1,12 @@
 import express from "express";
-import { selectPlan, getCurrentWorkout, getCurrentSplit, finishWorkout } from "../controllers/plan.js";
+import { selectPlan, getCurrentWorkout, getCurrentSplit, finishWorkout, historyWorkout, getHistory } from "../controllers/plan.js";
 import { addWorkout, getWorkout,  } from "../controllers/workout.js";
 import { verifyToken } from "../middleware/auth.js";
 const router = express.Router();
 
 router.post("/addWorkout" ,  addWorkout);
+router.post("/historyWorkout" ,  historyWorkout);
+router.get("/getHistory" ,  getHistory);
 router.get("/getExercises" ,  getWorkout); //gets you the exercises
 router.post("/finishWorkout" ,  finishWorkout);
 router.post("/selectPlan" ,  selectPlan);

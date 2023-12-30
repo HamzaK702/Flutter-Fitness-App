@@ -1,6 +1,8 @@
 
 import 'package:fitness_app/bloc/models/workoutModel.dart';
 import 'package:fitness_app/bloc/yoga/yoga_bloc.dart';
+import 'package:fitness_app/widgets/ExerciseDetailWidget.dart';
+import 'package:fitness_app/widgets/customButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -53,9 +55,7 @@ class _ExerciseBottomSheetState extends State<ExerciseBottomSheet> {
         children: [
           Text(category, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
           SizedBox(height: 20),
-          Text(currentExercise.exercise, style: TextStyle(fontSize: 18, color: Colors.white)),
-          SizedBox(height: 10),
-          Text(currentExercise.sets != null ? 'Sets: ${currentExercise.sets}, Reps: ${currentExercise.reps}' : 'Time: ${currentExercise.time}', style: TextStyle(color: Colors.white)),
+          ExerciseDetailWidget(exerciseDetail: currentExercise),
           SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -66,23 +66,13 @@ class _ExerciseBottomSheetState extends State<ExerciseBottomSheet> {
             ),
             Spacer(),
             if (isLastExercise)
-              ElevatedButton(
-              child: Text(
-                'Finish Workout',
-                style: GoogleFonts.notoSans(
-                  textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black),
-                ),
-              ),
-              onPressed: () {
-                   
+            CustomElevatedButton(
+                    buttonText: 'FINISH WORKOUT',
+                    onPressed: () {
+                    
                     Navigator.of(context).pop();
                   },
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xFFF2FF00),
-                onPrimary: Colors.white,
-                minimumSize: Size(200, 50),
-              ),
-            ),
+                ),
               Spacer(),
              IconButton(
                 icon: Icon(Icons.arrow_forward_ios, color: Colors.white),
@@ -174,20 +164,13 @@ Widget _buildStartWorkoutSection(BuildContext context, YogaLoadedState state) {
           padding: const EdgeInsets.all(20),
           child: Align(
             alignment: Alignment.topCenter,
-            child: ElevatedButton(
-              child: Text(
-                'START YOGA',
-                style: GoogleFonts.notoSans(
-                  textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black),
+            child: 
+               CustomElevatedButton(
+                    buttonText: 'START YOGA',
+                    onPressed: () => _showExerciseBottomSheet(context, state.data),
+
                 ),
-              ),
-              onPressed: () => _showExerciseBottomSheet(context, state.data),
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xFFF2FF00),
-                onPrimary: Colors.white,
-                minimumSize: Size(200, 50),
-              ),
-            ),
+          
           ),
         ),
       ],
