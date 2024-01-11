@@ -40,12 +40,14 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Container(
         width: double.infinity,
-        decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/LOGO.png'),
-                fit: BoxFit.cover,
-              ),
-            ),
+        color: Color(0xFFF2FF00), // Yellow color background
+
+        // decoration: BoxDecoration(
+        //       image: DecorationImage(
+        //         image: AssetImage('assets/LOGO.png'),
+        //         fit: BoxFit.cover,
+        //       ),
+        //     ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -60,7 +62,7 @@ class _HomePageState extends State<HomePage> {
                   Text(
                     "Login",
                     style: GoogleFonts.notoSans(
-                      textStyle: TextStyle(fontSize: 54, fontWeight: FontWeight.w800, color: Colors.white),
+                      textStyle: TextStyle(fontSize: 54, fontWeight: FontWeight.w800, color: Colors.black),
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -71,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                   Text(
                     "Sign in to your account",
                     style: GoogleFonts.notoSans(
-                      textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white),
+                      textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.black),
                     ),
                     textAlign: TextAlign.center,
                   )
@@ -84,7 +86,7 @@ class _HomePageState extends State<HomePage> {
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.black,
-                  borderRadius: BorderRadius.only(topLeft: Radius.circular(60), topRight: Radius.circular(60))
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30))
                 ),
                 child: Padding(
                   
@@ -101,61 +103,143 @@ class _HomePageState extends State<HomePage> {
                         setState(() => _isLoading = false);
                       }
                     },
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        children: <Widget>[
-                          // Email Field
-                         EmailField(
-                            key: ValueKey('email'),
-                            initialValue: 'hmzkhan@gmail.com',
-                            onSaved: (value) {
-                              _email = value!;
-                            },
-                            ),
-                          SizedBox(height: 12),
-                          PasswordField(
-                            key: ValueKey('password'),
-                            initialValue: "hamza123",
-                            onSaved: (value) {
-                              _password = value!;
-                            },
-                    ),
-                SizedBox(height: 5),
-                if (_isLoading) CircularProgressIndicator(),
-                if (!_isLoading) 
-                          SizedBox(height: 5,),
-                         TextButton(
-                          onPressed: () {
-                            // TODO: Implement forgot password functionality
-                          },
-                          child: Text(
-                            "Forgot Password?",
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                        ),
+                    child: 
+                    Form(
+  key: _formKey,
+  child: SingleChildScrollView( // Wrap with SingleChildScrollView
+    padding: EdgeInsets.all(16), // Add padding if needed
+    child: Column(
+      children: <Widget>[
+        // "Welcome Back!" text
+        Text(
+          'Welcome Back!',
+          style: GoogleFonts.notoSans(
+            textStyle: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+        ),
+        SizedBox(height: 10),
 
-                        SizedBox(height: 10,),
-                        CustomElevatedButton(
-                            buttonText: 'LOGIN',
-                            onPressed: 
-                             _trySubmit,
-                            ),
-                        SizedBox(height: 100,),
-                        CustomTextButton(
-                              text: "Don't have an account?",
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => RegisterScreen()),
-                                );
-                              },
+        // Email Field
+        EmailField(
+          key: ValueKey('email'),
+          initialValue: 'hmzkhan@gmail.com',
+          onSaved: (value) {
+            _email = value!;
+          },
+        ),
+        SizedBox(height: 12),
+
+        // Password Field
+        PasswordField(
+          key: ValueKey('password'),
+          initialValue: "hamza123",
+          onSaved: (value) {
+            _password = value!;
+          },
+        ),
+        SizedBox(height: 5),
+
+        if (_isLoading) CircularProgressIndicator(),
+        if (!_isLoading) SizedBox(height: 5),
+
+        // Forgot Password Button
+        TextButton(
+          onPressed: () {
+            // TODO: Implement forgot password functionality
+          },
+          child: Text(
+            "Forgot Password?",
+            style: TextStyle(color: Colors.grey),
+          ),
+        ),
+
+        SizedBox(height: 10),
+
+        // Login Button
+        CustomElevatedButton(
+          buttonText: 'LOGIN',
+          onPressed: _trySubmit,
+        ),
+        SizedBox(height: 80),
+
+        // Don't have an account? Button
+        CustomTextButton(
+          text: "Don't have an account?",
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => RegisterScreen()),
+            );
+          },
+        ),
+      ],
+    ),
+  ),
+),
+                //     Form(
+                //       key: _formKey,
+                //       child: Column(
+                //         children: <Widget>[
+                //           // Email Field
+                //             Text(
+                //           'Welcome Back!',
+                //           style: GoogleFonts.notoSans(
+                //             textStyle: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+                //               ),
+                //             ),
+                //             SizedBox(
+                //               height: 10,
+                //             ),
+                //          EmailField(
+                //             key: ValueKey('email'),
+                //             initialValue: 'hmzkhan@gmail.com',
+                //             onSaved: (value) {
+                //               _email = value!;
+                //             },
+                //             ),
+                //           SizedBox(height: 12),
+                //           PasswordField(
+                //             key: ValueKey('password'),
+                //             initialValue: "hamza123",
+                //             onSaved: (value) {
+                //               _password = value!;
+                //             },
+                //     ),
+                // SizedBox(height: 5),
+                // if (_isLoading) CircularProgressIndicator(),
+                // if (!_isLoading) 
+                //           SizedBox(height: 5,),
+                //          TextButton(
+                //           onPressed: () {
+                //             // TODO: Implement forgot password functionality
+                //           },
+                //           child: Text(
+                //             "Forgot Password?",
+                //             style: TextStyle(color: Colors.grey),
+                //           ),
+                //         ),
+
+                //         SizedBox(height: 10,),
+                //         CustomElevatedButton(
+                //             buttonText: 'LOGIN',
+                //             onPressed: 
+                //              _trySubmit,
+                //             ),
+                //         SizedBox(height: 80,),
+                //         CustomTextButton(
+                //               text: "Don't have an account?",
+                //               onPressed: () {
+                //                 Navigator.push(
+                //                   context,
+                //                   MaterialPageRoute(builder: (context) => RegisterScreen()),
+                //                 );
+                //               },
                        
-                            )
+                //             )
                                    
-                        ],
-                      ),
-                    ),
+                //         ],
+                //       ),
+                //     ),
                   ),
                 ),
               ),

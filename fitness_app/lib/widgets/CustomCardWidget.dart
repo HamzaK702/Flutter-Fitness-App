@@ -24,7 +24,7 @@ class SectionCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 80),
+            SizedBox(height: 50),
             Padding(
               padding: const EdgeInsets.only(left: 10),
               child: Text(

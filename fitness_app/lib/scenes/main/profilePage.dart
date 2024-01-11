@@ -3,6 +3,7 @@ import 'package:fitness_app/bloc/login/login_event_state.dart';
 import 'package:fitness_app/widgets/darkTextFieldWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 class DarkProfileForm extends StatefulWidget {
   @override
@@ -43,7 +44,15 @@ class _DarkProfileFormState extends State<DarkProfileForm> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
+
                   children: [
+                    Padding(
+                        padding: const EdgeInsets.only(right: 40),
+                        child: Container(
+                          width: double.infinity,
+                          child: Lottie.asset('assets/profile.json'),
+                        ),
+                      ),
                     DarkTextField(
                       label: 'First Name',
                       controller: _firstNameController,

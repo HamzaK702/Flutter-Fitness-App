@@ -1,4 +1,5 @@
 
+import 'package:animate_do/animate_do.dart';
 import 'package:fitness_app/scenes/auth/login.dart';
 import 'package:fitness_app/widgets/customTextButtonWidget.dart';
 import 'package:fitness_app/widgets/customTextFieldWidget.dart';
@@ -73,6 +74,17 @@ void _trySubmit() async {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
+                FadeInUp(duration: Duration(milliseconds: 1000), 
+                child: 
+                  Text(
+                'Register',
+                style: GoogleFonts.notoSans(
+                  textStyle: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                  ),
+                  ),
+                 
+                  SizedBox(height: 20),
                 CustomTextField(
                                 key: ValueKey('firstName'),
                                 onSaved: (value) {
@@ -91,7 +103,7 @@ void _trySubmit() async {
                               icon: Icons.person,
                             ),
                 SizedBox(height: 12),
-                EmailField(
+                  EmailField(
                             key: ValueKey('email'),
                             initialValue: 'hmzkhan@gmail.com',
                             onSaved: (value) {
@@ -99,7 +111,7 @@ void _trySubmit() async {
                             },
                             ),
                 SizedBox(height: 12),
-                PasswordField(
+                  PasswordField(
                             key: ValueKey('password'),
                             initialValue: "hamza123",
                             onSaved: (value) {
