@@ -6,7 +6,7 @@ import 'dart:convert';
 class HistoryRepository {
  Future<WorkoutHistory> fetchHistory(String userId) async {
     print("fetch history called");
-     final response = await http.get(Uri.parse('http://localhost:3001/plan/getHistory?userId=$userId'));
+     final response = await http.get(Uri.parse('https://fitnessappbackendnodejs-production.up.railway.app/plan/getHistory?userId=$userId'));
 
     if (response.statusCode == 200) {
     return WorkoutHistory.fromJson(json.decode(response.body));
@@ -18,7 +18,7 @@ class HistoryRepository {
 
  Future<void> updateHistory(String userId, String workoutName) async {
   print("update history called");
-  var url = Uri.parse('http://localhost:3001/plan/historyWorkout'); // Replace with your server's IP and port
+  var url = Uri.parse('https://fitnessappbackendnodejs-production.up.railway.app/plan/historyWorkout'); // Replace with your server's IP and port
   try {
     var response = await http.post(
       url,

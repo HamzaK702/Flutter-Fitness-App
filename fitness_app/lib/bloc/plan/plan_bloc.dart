@@ -28,10 +28,9 @@ class PlanBloc extends Bloc<PlanEvent, PlanState> {
     
     emit(PlanLoading());
     try {
-      print("hello");
+      
       final splitData = await planRepository.fetchPlan(event.id);
-      print(splitData);
-      print("--------------------------------------------------");
+      
       emit(PlanSuccess(split: splitData));
     } catch (e) {
       emit(PlanFailure(e.toString()));

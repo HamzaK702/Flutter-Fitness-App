@@ -26,7 +26,7 @@ class DayBloc extends Bloc<DayEvent, DayState> {
 
 Future<Split> fetchDayData(String userId) async {
   final response = await http.post(
-    Uri.parse('http://localhost:3001/plan/getWorkout'),
+    Uri.parse('https://fitnessappbackendnodejs-production.up.railway.app/plan/getWorkout'),
     headers: {'Content-Type': 'application/json'},
     body: json.encode({'userId': userId}),
   );

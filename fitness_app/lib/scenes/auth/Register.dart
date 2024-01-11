@@ -36,7 +36,7 @@ void _trySubmit() async {
     });
     
     final response = await http.post(
-      Uri.parse('http://localhost:3001/auth/register'), // Change to your server's IP when running on a real device
+      Uri.parse('https://fitnessappbackendnodejs-production.up.railway.app/auth/register'), // Change to your server's IP when running on a real device
       headers: {'Content-Type': 'application/json'},
       body: json.encode({
         'firstName':_firstName.trim(),

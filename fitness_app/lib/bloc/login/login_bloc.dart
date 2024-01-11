@@ -68,7 +68,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   required int weight,
   required int consist,
 }) async {
-  final String apiUrl = 'http://localhost:3001/auth/update/$userId'; // Replace with your actual backend URL
+  final String apiUrl = 'https://fitnessappbackendnodejs-production.up.railway.app/auth/update/$userId'; // Replace with your actual backend URL
 
   try {
     final response = await http.put(
@@ -122,7 +122,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Future<void> _makeUpdateConsistApiCall(String userId) async {
-    final String apiUrl = 'http://localhost:3001/plan/finishWorkout';
+    final String apiUrl = 'https://fitnessappbackendnodejs-production.up.railway.app/plan/finishWorkout';
     try {
       final response = await http.post(
         Uri.parse(apiUrl),

@@ -5,7 +5,7 @@ import 'dart:convert';
 class YogaRepository {
   Future<Workout> fetchWorkout(String day) async {
     final response = await http.get(
-      Uri.parse('http://localhost:3001/plan/getExercises').replace(queryParameters: {
+      Uri.parse('https://fitnessappbackendnodejs-production.up.railway.app/plan/getExercises').replace(queryParameters: {
         'day': day,
       }),
     );

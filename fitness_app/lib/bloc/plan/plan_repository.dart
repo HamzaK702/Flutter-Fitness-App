@@ -7,7 +7,7 @@ class PlanRepository {
   print('Fetching plan for user: $userId'); // Logging statement
 
   final response = await http.post(
-    Uri.parse('http://localhost:3001/plan/getSplit'),
+    Uri.parse('https://fitnessappbackendnodejs-production.up.railway.app/plan/getSplit'),
     headers: {'Content-Type': 'application/json'},
     body: json.encode({'userId': userId}),
   );
@@ -31,7 +31,7 @@ class PlanRepository {
   Future<String> updatePlan(String userId, String split) async {
     print("update plan called");
     final response = await http.post(
-      Uri.parse('http://localhost:3001/plan/selectPlan'),
+      Uri.parse('https://fitnessappbackendnodejs-production.up.railway.app/plan/selectPlan'),
       headers: {'Content-Type': 'application/json'},
       body: json.encode({'userId': userId, 'split': split}),
     );
