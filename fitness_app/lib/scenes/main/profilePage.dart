@@ -53,16 +53,19 @@ class _DarkProfileFormState extends State<DarkProfileForm> {
                           child: Lottie.asset('assets/profile.json'),
                         ),
                       ),
+                      
                     DarkTextField(
                       label: 'First Name',
                       controller: _firstNameController,
                       onChanged: (value) => _onFieldChanged(),
                     ),
+                    SizedBox(height: 20),
                     DarkTextField(
                       label: 'Last Name',
                       controller: _lastNameController,
                       onChanged: (value) => _onFieldChanged(),
                     ),
+                    SizedBox(height: 20),
                     DarkTextField(
                       label: 'Height',
                       controller: _heightController,

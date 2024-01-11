@@ -12,21 +12,20 @@ class DarkTextField extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      style: TextStyle(color: Colors.white),
-      decoration: InputDecoration(
-        labelText: label,
-        labelStyle: TextStyle(color: Colors.white),
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
-        ),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
-        ),
-      ),
-      onChanged: onChanged,
-    );
-  }
+Widget build(BuildContext context) {
+  return TextFormField(
+    controller: controller,
+    style: TextStyle(color: Colors.white),
+    decoration: InputDecoration(
+      labelText: label,
+      labelStyle: TextStyle(color: Colors.grey),
+      filled: true,
+      fillColor: Colors.grey[800],
+     
+    
+     
+    ),
+    onChanged: onChanged,
+  );
+}
 }

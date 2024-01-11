@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Fitness Club',
+      title: 'Fitness App',
       home: OnboardingScreen(),
     );
   }
