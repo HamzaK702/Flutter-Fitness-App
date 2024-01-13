@@ -69,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 child: Column(
                   children: <Widget>[
-                    SizedBox(height: 30),
+                    SizedBox(height: 80),
                     Padding(
                       padding: EdgeInsets.only(left: 16.0),
                       child: Align(
@@ -114,6 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     SizedBox(height: 12),
                     buildHorizontalScrollSection2(context),
+                    SizedBox(height: 80),
                   ],
                 ),
               ),

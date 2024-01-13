@@ -147,7 +147,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
 Future<Map<String, dynamic>> loginUser(String email, String password) async {
   final response = await http.post(
-    Uri.parse('http://localhost:3001/auth/login'),
+    Uri.parse('https://fitnessappbackendnodejs-production.up.railway.app/auth/login'),
     headers: {'Content-Type': 'application/json'},
     body: json.encode({
       'email': email,
